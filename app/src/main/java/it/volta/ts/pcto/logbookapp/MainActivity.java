@@ -3,6 +3,8 @@ package it.volta.ts.pcto.logbookapp;
 import android.app.Activity;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 public class MainActivity extends Activity {
 
     @Override

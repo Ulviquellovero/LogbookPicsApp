@@ -10,7 +10,13 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven { url 'https://jitpack.io' }
     }
 }
+
+dependencies {
+    implementation 'com.github.yuriy-budiyev:code-scanner:2.3.2'
+}
+
 rootProject.name = "LogBookApp"
 include ':app'
