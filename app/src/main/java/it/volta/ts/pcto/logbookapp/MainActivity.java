@@ -2,9 +2,8 @@ package it.volta.ts.pcto.logbookapp;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
 
-import it.volta.ts.pcto.logbookapp.utils.JSONTask;
+import it.volta.ts.pcto.logbookapp.image.ImageRenderer;
 
 
 public class MainActivity extends Activity {
@@ -17,9 +16,7 @@ public class MainActivity extends Activity {
 
         // TESTING
         // TODO: replace this to test other feature
-        JSONTask myJSONTask = new JSONTask();
-        myJSONTask.loadJSON(MainActivity.this,"https://users3.elettra.eu/lpa_app/lpa_jsonexample");
-
+        ImageRenderer imageRenderer = new ImageRenderer(this, MainActivity.this, "https://users3.elettra.eu/lpa_app/lpa_jsonexample", R.id.test);
 
     }
 }
