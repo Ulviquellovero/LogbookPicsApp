@@ -1,4 +1,5 @@
 package it.volta.ts.pcto.logbookapp;
+import it.volta.ts.pcto.logbookapp.image.ImageRenderer;
 
 import android.Manifest;
 import android.app.Activity;
@@ -96,5 +97,15 @@ public class MainActivity extends Activity
     {
         qrScanner.releaseResources();
         super.onPause();
+
+        //setContentView(R.layout.activity_main);
+        /*
+        setContentView(R.layout.image_prev);
+
+        // TESTING
+        // TODO: replace this to test other feature
+        ImageRenderer imageRenderer = new ImageRenderer(this, MainActivity.this, "https://users3.elettra.eu/lpa_app/lpa_jsonexample", R.id.img);
+
+        json-parsing*/
     }
 }

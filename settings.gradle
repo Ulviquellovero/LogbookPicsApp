@@ -10,14 +10,9 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven { url 'https://jitpack.io' }
     }
 }
 
 rootProject.name = "LogBookApp"
 include ':app'
-
-dependencyResolutionManagement {
-    repositories {
-        maven { url 'https://jitpack.io' }
-    }
-}
