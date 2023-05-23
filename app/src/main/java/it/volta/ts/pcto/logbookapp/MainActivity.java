@@ -1,11 +1,12 @@
 package it.volta.ts.pcto.logbookapp;
-import it.volta.ts.pcto.logbookapp.image.ImageRenderer;
+import it.volta.ts.pcto.logbookapp.activities.PreviewActivity;
+import it.volta.ts.pcto.logbookapp.singleton.QrCodeInfo;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
@@ -61,7 +62,9 @@ public class MainActivity extends Activity
 
     private void showQrContent(@NonNull final Result result)
     {
-        Toast.makeText(MainActivity.this, result.getText(), Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(MainActivity.this, PreviewActivity.class));
+        QrCodeInfo.url =result.getText();
+        //Toast.makeText(MainActivity.this, result.getText(), Toast.LENGTH_SHORT).show();
     }
 
     //---------------------------------------------------------------------------------------------
