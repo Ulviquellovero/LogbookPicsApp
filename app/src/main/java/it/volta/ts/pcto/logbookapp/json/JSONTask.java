@@ -1,6 +1,7 @@
 package it.volta.ts.pcto.logbookapp.json;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -56,6 +57,8 @@ public class JSONTask
                 (Response.ErrorListener) error -> {
                     // initiate negative callback
                     callback.onCallbackFailed();
+
+                    Log.e("JSONTask", error.toString());
 
                 }
         );
