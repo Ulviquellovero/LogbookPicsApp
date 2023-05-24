@@ -13,10 +13,11 @@ import org.json.JSONObject;
 import java.util.Base64;
 
 import it.volta.ts.pcto.logbookapp.json.JSONTask;
+import it.volta.ts.pcto.logbookapp.singleton.QrCodeInfo;
 
 public class ImageRenderer {
 
-    private JSONTask json;
+    private JSONObject root;
     private String url;
     private ImageView imageRef;
     private Activity activity;
@@ -24,11 +25,14 @@ public class ImageRenderer {
     public ImageRenderer(Activity activity, Context ctx, String url, int id) {
         imageRef = (ImageView) activity.findViewById(id);
         this.activity=activity;
-        json = new JSONTask(ctx);
-        json.loadJSON(url, new JSONTask.JSONCallback() {
+
+        if(QrCodeInfo.jsonTask==null)
+            QrCodeInfo.jsonTask = new JSONTask(ctx);
+        QrCodeInfo.jsonTask.loadJSON(url, new JSONTask.JSONCallback() {
             @Override
             public void onCallbackSuccessful() {
                 Log.d(this.getClass().getSimpleName(),"Loaded JSON");
+                root = QrCodeInfo.jsonTask.getRootJSON();
                 renderImage();
             }
 
@@ -42,7 +46,6 @@ public class ImageRenderer {
 
     // TODO: this can be reworked to work better
     private void renderImage(){
-        JSONObject root = json.getRootJSON();
         String image;
         if(root == null){
             return;

@@ -29,6 +29,28 @@ public class JSONTask
         this.volleyQueue = Volley.newRequestQueue(this.ctx);
     }
 
+    // TEST: this is for testing purposes, we're uploading the same JSON file we recieved from the GET request here
+    public void uploadJSON(String url, final JSONCallback callback){
+        // provided a json has been loaded in the first place
+        if (root==null){
+            Log.d(this.getClass().getSimpleName().toString(), "Root JSON object is null");
+            return;
+        }
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, root,
+                    res ->{
+                        // callback
+                        Log.d(this.getClass().getSimpleName().toString(), "JSON posted successfully");
+                        callback.onCallbackSuccessful();
+                    },
+                    err -> {
+                        Log.e(this.getClass().getSimpleName().toString(), err.toString());
+                        callback.onCallbackFailed();
+                    }
+                );
+        volleyQueue.add(jsonObjectRequest);
+    }
+
     public void loadJSON(String url, final JSONCallback callback) {
         // since the response we get from the api is in JSON, we
         // need to use `JsonObjectRequest` for parsing the

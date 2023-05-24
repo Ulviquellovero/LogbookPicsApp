@@ -63,7 +63,7 @@ public class MainActivity extends Activity
     private void showQrContent(@NonNull final Result result)
     {
         startActivity(new Intent(MainActivity.this, PreviewActivity.class));
-        QrCodeInfo.url =result.getText();
+        QrCodeInfo.url = result.getText();
         //Toast.makeText(MainActivity.this, result.getText(), Toast.LENGTH_SHORT).show();
     }
 
