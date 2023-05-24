@@ -10,6 +10,8 @@ public class QrCodeInfo {
     public static String url;
     public static JSONTask jsonTask;
     public static String uploadUrl;
+
+    // this to fields below should be ignored, because for the time being they are here only for testing purposes
     public static JSONObject root;
     public static Bitmap imageBitmap;
 }
