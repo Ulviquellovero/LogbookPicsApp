@@ -37,6 +37,7 @@ public class PreviewActivity extends Activity {
             public void onClick(View view) {
                 // do post
                 postHandler = new PostHandler(act,PreviewActivity.this, QrCodeInfo.uploadUrl);
+                view.setEnabled(false);
             }
         });
     }
