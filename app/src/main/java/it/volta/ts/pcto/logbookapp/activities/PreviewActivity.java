@@ -9,6 +9,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import org.json.JSONObject;
+
 import it.volta.ts.pcto.logbookapp.R;
 import it.volta.ts.pcto.logbookapp.image.ImageRenderer;
 import it.volta.ts.pcto.logbookapp.image.PostHandler;
@@ -24,17 +26,17 @@ public class PreviewActivity extends Activity {
         setContentView(R.layout.image_prev);
         imageRenderer = new ImageRenderer(this, PreviewActivity.this, QrCodeInfo.url, R.id.img);
 
-        // getting post url
-        //String postUrl = QrCodeInfo.jsonTask.getRootJSON().optString("uploadJSONdestination");
-        Log.d("LogBookDebug", QrCodeInfo.jsonTask.getRootJSONString().toString());
+        Log.d("LogBookDebug", QrCodeInfo.url);
 
-        postHandler = new PostHandler(this,PreviewActivity.this, "https://users3.elettra.eu/lpa_app/post_json" /*QrCodeInfo.jsonTask.getRootJSON().optString("uploadJSONdestination")*/);
+        // getting post url
+
         // on the press of a button, post to the server
+        Activity act = this;
         ((TextView)findViewById(R.id.post)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // do post
-                postHandler.doPost();
+                postHandler = new PostHandler(act,PreviewActivity.this, QrCodeInfo.uploadUrl);
             }
         });
     }

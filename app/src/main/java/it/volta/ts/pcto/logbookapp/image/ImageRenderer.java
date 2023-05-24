@@ -19,6 +19,7 @@ public class ImageRenderer {
 
     private JSONObject root;
     private String url;
+    private String postUrl;
     private ImageView imageRef;
     private Activity activity;
 
@@ -47,11 +48,14 @@ public class ImageRenderer {
     // TODO: this can be reworked to work better
     private void renderImage(){
         String image;
-        if(root == null){
+        if(QrCodeInfo.jsonTask.getRootJSON() == null){
             return;
         }
 
-        image = root.optString("inputimage");
+        image = QrCodeInfo.jsonTask.getRootJSON().optString("inputimage");
+        QrCodeInfo.uploadUrl = QrCodeInfo.jsonTask.getRootJSON().optString("uploadJSONdestination");
+
+        Log.d("LogBookDebug",QrCodeInfo.uploadUrl);
 
         String temp = "";
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
@@ -69,6 +73,6 @@ public class ImageRenderer {
             });
         }
 
-
     }
+
 }

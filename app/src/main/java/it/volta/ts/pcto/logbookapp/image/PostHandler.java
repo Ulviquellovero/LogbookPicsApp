@@ -29,9 +29,6 @@ public class PostHandler {
         this.postUrl = postUrl;
         this.activity=activity;
         this.ctx=ctx;
-    }
-
-    public void doPost(){
 
         QrCodeInfo.jsonTask.uploadJSON(postUrl, new JSONTask.JSONCallback() {
             @Override
