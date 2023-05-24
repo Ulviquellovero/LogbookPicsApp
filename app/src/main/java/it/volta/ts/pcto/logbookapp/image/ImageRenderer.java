@@ -23,35 +23,41 @@ public class ImageRenderer {
     private ImageView imageRef;
     private Activity activity;
 
-    public ImageRenderer(Activity activity, Context ctx, String url, int id) {
+    public ImageRenderer(Activity activity, Context ctx, String url, int id, JSONTask.JSONCallback jsonCallback) {
         imageRef = (ImageView) activity.findViewById(id);
         this.activity=activity;
 
         if(QrCodeInfo.jsonTask==null)
             QrCodeInfo.jsonTask = new JSONTask(ctx);
+
         QrCodeInfo.jsonTask.loadJSON(url, new JSONTask.JSONCallback() {
             @Override
             public void onCallbackSuccessful() {
                 Log.d(this.getClass().getSimpleName(),"Loaded JSON");
                 root = QrCodeInfo.jsonTask.getRootJSON();
-                renderImage();
+                renderImage(jsonCallback);
             }
 
             @Override
             public void onCallbackFailed() {
                 Log.e(this.getClass().getSimpleName().toString(), "JSON Error");
-                // print it to the screen
+                jsonCallback.onCallbackFailed();
             }
         });
     }
 
+
     // TODO: this can be reworked to work better
-    private void renderImage(){
+    private void renderImage(JSONTask.JSONCallback jsonCallback){
         String image;
         if(QrCodeInfo.jsonTask.getRootJSON() == null){
             return;
         }
 
+
+        QrCodeInfo.root = QrCodeInfo.jsonTask.getRootJSON();
+
+        if(QrCodeInfo.root!= null)  Log.d("ImageRenderer", "if it aint null here");
         image = QrCodeInfo.jsonTask.getRootJSON().optString("inputimage");
         QrCodeInfo.uploadUrl = QrCodeInfo.jsonTask.getRootJSON().optString("uploadJSONdestination");
 
@@ -71,8 +77,11 @@ public class ImageRenderer {
                     imageRef.setImageBitmap(imgSrc);
                 }
             });
+
+
         }
 
+        jsonCallback.onCallbackSuccessful();
     }
 
 }

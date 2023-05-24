@@ -10,5 +10,6 @@ public class QrCodeInfo {
     public static String url;
     public static JSONTask jsonTask;
     public static String uploadUrl;
+    public static JSONObject root;
     public static Bitmap imageBitmap;
 }

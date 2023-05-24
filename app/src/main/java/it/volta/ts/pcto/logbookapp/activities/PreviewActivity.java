@@ -12,8 +12,11 @@ import android.widget.TextView;
 import org.json.JSONObject;
 
 import it.volta.ts.pcto.logbookapp.R;
+import it.volta.ts.pcto.logbookapp.component_system.ComponentComposer;
+import it.volta.ts.pcto.logbookapp.component_system.components.ComponentBase;
 import it.volta.ts.pcto.logbookapp.image.ImageRenderer;
 import it.volta.ts.pcto.logbookapp.image.PostHandler;
+import it.volta.ts.pcto.logbookapp.json.JSONTask;
 import it.volta.ts.pcto.logbookapp.singleton.QrCodeInfo;
 
 public class PreviewActivity extends Activity {
@@ -24,21 +27,34 @@ public class PreviewActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.image_prev);
-        imageRenderer = new ImageRenderer(this, PreviewActivity.this, QrCodeInfo.url, R.id.img);
-
-        Log.d("LogBookDebug", QrCodeInfo.url);
-
-        // getting post url
-
-        // on the press of a button, post to the server
         Activity act = this;
-        ((TextView)findViewById(R.id.post)).setOnClickListener(new View.OnClickListener() {
+        imageRenderer = new ImageRenderer(this, PreviewActivity.this, QrCodeInfo.url, R.id.img, new JSONTask.JSONCallback() {
             @Override
-            public void onClick(View view) {
-                // do post
-                postHandler = new PostHandler(act,PreviewActivity.this, QrCodeInfo.uploadUrl);
-                view.setEnabled(false);
+            public void onCallbackSuccessful() {
+                // This is for testing purposes only:
+                ComponentComposer cc = new ComponentComposer();
+
+                Log.d("LogBookDebug", QrCodeInfo.url);
+
+                // getting post url
+
+                // on the press of a button, post to the server
+
+                ((TextView)findViewById(R.id.post)).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        // do post
+                        postHandler = new PostHandler(act,PreviewActivity.this, QrCodeInfo.uploadUrl);
+                        view.setEnabled(false);
+                    }
+                });
+            }
+
+            @Override
+            public void onCallbackFailed() {
+
             }
         });
+
     }
 }
