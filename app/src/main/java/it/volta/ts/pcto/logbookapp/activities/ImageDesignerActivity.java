@@ -71,7 +71,7 @@ public class ImageDesignerActivity extends Activity
     private void configPhotoEditor()
     {
         PhotoEditorView mPhotoEditorView = findViewById(R.id.photoEditorView);
-        mPhotoEditorView.getSource().setImageResource(R.drawable.img);
+        mPhotoEditorView.getSource().setImageResource(R.drawable.img_test);
         Typeface mTextRobotoTf = ResourcesCompat.getFont(this, R.font.roboto_medium);
         mPhotoEditor = new PhotoEditor.Builder(this, mPhotoEditorView)
                 .setPinchTextScalable(true)
@@ -144,7 +144,8 @@ public class ImageDesignerActivity extends Activity
 
     private void onInsTextBtnClick()
     {
-        mPhotoEditor.addText("Enter Text", R.color.black);
+        String msg = getResources().getString(R.string.enter_text);;
+        mPhotoEditor.addText(msg, R.color.black);
     }
 
     //---------------------------------------------------------------------------------------------
@@ -152,15 +153,15 @@ public class ImageDesignerActivity extends Activity
     private void changeText(View view, int i)
     {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Enter text");
+        builder.setTitle(R.string.enter_text);
         final EditText editText = new EditText(this);
         builder.setView(editText);
-        builder.setPositiveButton("OK", (dialog, which) -> {
+        builder.setPositiveButton(R.string.ok, (dialog, which) -> {
             String inputText = editText.getText().toString();
             mPhotoEditor.editText(view, inputText, i);
             dialog.dismiss();
         });
-        builder.setNegativeButton("Cancel", (dialog, which) -> {
+        builder.setNegativeButton(R.string.cancel, (dialog, which) -> {
             dialog.dismiss();
         });
         AlertDialog dialog = builder.create();

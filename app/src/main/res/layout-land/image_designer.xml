@@ -20,37 +20,37 @@
             android:id="@+id/pencilBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/office_material" />
+            android:src="@drawable/pencil_icon" />
 
         <ImageButton
             android:id="@+id/eraserBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/eraser" />
+            android:src="@drawable/eraser_icon" />
 
         <ImageButton
             android:id="@+id/insTextBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/text" />
+            android:src="@drawable/text_ins_icon" />
 
         <ImageButton
             android:id="@+id/undoBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/undo" />
+            android:src="@drawable/undo_icon" />
 
         <ImageButton
             android:id="@+id/redoBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/redo" />
+            android:src="@drawable/redo_icon" />
 
         <ImageButton
             android:id="@+id/deleteBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/bin" />
+            android:src="@drawable/bin_icon" />
     </LinearLayout>
 
     <ja.burhanrashid52.photoeditor.PhotoEditorView
