@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import it.volta.ts.pcto.logbookapp.MainActivity;
 import it.volta.ts.pcto.logbookapp.R;
@@ -33,13 +34,13 @@ public class PreviewActivity extends Activity {
             @Override
             public void onCallbackSuccessful() {
 
-                Log.d("LogBookDebug", QrCodeInfo.url);
+                TextView postButton = (TextView)findViewById(R.id.post);
+                TextView testComponents = (TextView)findViewById(R.id.test_components);
 
-                // getting post url
+                postButton.setEnabled(true);
+                testComponents.setEnabled(true);
 
-                // on the press of a button, post to the server
-
-                ((TextView)findViewById(R.id.post)).setOnClickListener(new View.OnClickListener() {
+                postButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         // do post
@@ -48,7 +49,7 @@ public class PreviewActivity extends Activity {
                     }
                 });
 
-                ((TextView)findViewById(R.id.test_components)).setOnClickListener(new View.OnClickListener() {
+                testComponents.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         startActivity(new Intent(PreviewActivity.this, ComponentsTestActivity.class));

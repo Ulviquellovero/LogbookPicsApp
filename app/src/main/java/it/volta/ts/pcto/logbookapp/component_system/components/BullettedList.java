@@ -36,10 +36,7 @@ public class BullettedList extends ComponentBase{
     public void componentToView(Context ctx) {
         super.view = new LinearLayout(ctx);
 
-        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) super.view.getLayoutParams();
-        params.width = LinearLayout.LayoutParams.MATCH_PARENT;
-        params.height = LinearLayout.LayoutParams.WRAP_CONTENT;
-
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);;
         super.view.setLayoutParams(params);
         super.view.setOrientation(LinearLayout.HORIZONTAL);
 

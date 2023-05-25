@@ -1,14 +1,16 @@
 package it.volta.ts.pcto.logbookapp.component_system;
 
 import android.content.Context;
+import android.util.Log;
+import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
 import it.volta.ts.pcto.logbookapp.component_system.components.BullettedList;
 import it.volta.ts.pcto.logbookapp.component_system.components.CheckBox;
@@ -28,6 +30,9 @@ public class ComponentComposer {
         newJson = QrCodeInfo.postJSON;
         root = QrCodeInfo.jsonTask.getRootJSON();
 
+        // arraylist init
+        list = new ArrayList<ComponentBase>();
+
         // hash map init
         compSelector = new HashMap<>();
         compSelector.put("text", ComponentType.TEXTLABEL);
@@ -37,6 +42,7 @@ public class ComponentComposer {
         compSelector.put("", ComponentType.UNKNOWN);
     }
 
+    /*
     public void readComponentsFromJson(Context ctx) throws JSONException {
         JSONArray componentList = root.getJSONArray("GUIdescription");
 
@@ -49,14 +55,42 @@ public class ComponentComposer {
             this.list.add(c);
         }
     }
+    */
+    public void readComponentsFromJson(Context ctx) throws JSONException {
+        JSONObject componentList = root.optJSONObject("GUIdescription");
 
-    public void addComponentsToExistingScrollview(ScrollView view){
-        for (int i = 0; i< list.size(); i++){
-            view.addView(list.get(i).getView());
+        Iterator<String> keys = componentList.keys();
+
+        while (keys.hasNext()){
+            Log.d("LogBookDebug", "AAAAA");
+            JSONObject jObj = (JSONObject) componentList.get(keys.next());
+
+            String value = jObj.optString("type");
+            ComponentBase c = resolveType(value);
+
+            if(c==null) continue;
+
+            c.setFields(jObj);
+            c.componentToView(ctx);
+            list.add(c);
+            Log.d("LogBookDebug","Boh "+Integer.toString(list.size()));
+        }
+
+    }
+
+    public void addComponentsToExistingScrollview(LinearLayout view){
+        Log.d("LogBookDebug", Integer.toString(list.size()));
+        for (ComponentBase e : list){
+            view.addView(e.getView());
+            Log.d("LogBookDebug", "View added");
         }
     }
 
     private ComponentBase resolveType(String type){
+        Log.d("LogBookDebug", type);
+        if(!compSelector.containsKey(type))
+            return null;
+
         switch (compSelector.get(type)){
             case CHECKBOX:
                 return new CheckBox();

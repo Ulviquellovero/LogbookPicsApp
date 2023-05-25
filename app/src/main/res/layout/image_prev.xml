@@ -17,12 +17,14 @@
         android:layout_height="wrap_content"
         android:text="POST"
         android:id="@+id/post"
+        android:enabled="false"
         ></Button>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Test Components"
         android:id="@+id/test_components"
+        android:enabled="false"
         ></Button>
 
 </LinearLayout>
