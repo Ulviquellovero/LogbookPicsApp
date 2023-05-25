@@ -62,7 +62,6 @@ public class ComponentComposer {
         Iterator<String> keys = componentList.keys();
 
         while (keys.hasNext()){
-            Log.d("LogBookDebug", "AAAAA");
             JSONObject jObj = (JSONObject) componentList.get(keys.next());
 
             String value = jObj.optString("type");
@@ -73,21 +72,21 @@ public class ComponentComposer {
             c.setFields(jObj);
             c.componentToView(ctx);
             list.add(c);
-            Log.d("LogBookDebug","Boh "+Integer.toString(list.size()));
         }
 
     }
 
     public void addComponentsToExistingScrollview(LinearLayout view){
-        Log.d("LogBookDebug", Integer.toString(list.size()));
         for (ComponentBase e : list){
             view.addView(e.getView());
-            Log.d("LogBookDebug", "View added");
         }
     }
 
+    public void removeAllComponentToExistingScrollView(LinearLayout view){
+        view.removeAllViews();
+    }
+
     private ComponentBase resolveType(String type){
-        Log.d("LogBookDebug", type);
         if(!compSelector.containsKey(type))
             return null;
 
@@ -103,4 +102,11 @@ public class ComponentComposer {
     }
 
 
+    public ArrayList<ComponentBase> getList() {
+        return list;
+    }
+
+    public void setList(ArrayList<ComponentBase> list) {
+        this.list = list;
+    }
 }

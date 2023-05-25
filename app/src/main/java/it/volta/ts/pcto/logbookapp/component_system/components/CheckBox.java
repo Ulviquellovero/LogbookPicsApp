@@ -3,6 +3,7 @@ package it.volta.ts.pcto.logbookapp.component_system.components;
 import android.app.ActionBar;
 import android.content.Context;
 import android.view.Gravity;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -43,15 +44,14 @@ public class CheckBox extends ComponentBase{
 
         // check box
         android.widget.CheckBox checkBox = new android.widget.CheckBox(ctx);
-        checkBox.setText(value);
         checkBox.setChecked(onOff);
 
-        // adding the menu
-        ImageView menu = new ImageView(ctx);
-        menu.setImageResource(R.drawable.baseline_menu_24);
+        EditText et =new EditText(ctx);
+        et.setText(value);
+
 
         super.view.addView(checkBox);
-        super.view.addView(menu);
-
+        super.view.addView(et);
+        super.view.addView(addMoveUpDownButton(ctx));
     }
 }

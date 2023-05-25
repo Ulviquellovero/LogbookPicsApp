@@ -1,6 +1,7 @@
 package it.volta.ts.pcto.logbookapp.component_system.components;
 
 import android.content.Context;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -42,13 +43,13 @@ public class BullettedList extends ComponentBase{
 
         // textview
         TextView tv = new TextView(ctx);
-        tv.setText(prefix+value);
+        tv.setText(prefix);
 
-        // adding the menu
-        ImageView menu = new ImageView(ctx);
-        menu.setImageResource(R.drawable.baseline_menu_24);
+        EditText editText = new EditText(ctx);
+        editText.setText(value);
 
         super.view.addView(tv);
-        super.view.addView(menu);
+        super.view.addView(editText);
+        super.view.addView(addMoveUpDownButton(ctx));
     }
 }
