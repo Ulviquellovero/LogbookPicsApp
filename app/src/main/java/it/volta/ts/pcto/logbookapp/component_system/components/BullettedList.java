@@ -6,10 +6,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.w3c.dom.Text;
 
 import it.volta.ts.pcto.logbookapp.R;
+import it.volta.ts.pcto.logbookapp.json.JSONOnUiUpdate;
 
 public class BullettedList extends ComponentBase{
     private String value;
@@ -17,6 +19,7 @@ public class BullettedList extends ComponentBase{
 
     public BullettedList() {
         super.componentType = ComponentType.BULLETTEDLIST;
+        super.compoentTag = "bulletedlist";
         this.prefix = " · ";
     }
 
@@ -34,8 +37,9 @@ public class BullettedList extends ComponentBase{
     }
 
     @Override
-    public void componentToView(Context ctx) {
+    public void componentToView(Context ctx, JSONOnUiUpdate jsonOnUiUpdate) {
         super.view = new LinearLayout(ctx);
+        super.view.setTag(super.compoentTag);
 
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);;
         super.view.setLayoutParams(params);
@@ -51,5 +55,15 @@ public class BullettedList extends ComponentBase{
         super.view.addView(tv);
         super.view.addView(editText);
         super.view.addView(addMoveUpDownButton(ctx));
+    }
+
+    @Override
+    public JSONObject componentToJson() throws JSONException {
+        JSONObject component = new JSONObject();
+
+        component.put("type", "list");
+        component.put("title", value);
+
+        return component;
     }
 }

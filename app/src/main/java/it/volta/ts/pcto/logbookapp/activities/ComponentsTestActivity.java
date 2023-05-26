@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 
 import org.json.JSONException;
 
@@ -20,6 +21,7 @@ import java.util.List;
 import it.volta.ts.pcto.logbookapp.R;
 import it.volta.ts.pcto.logbookapp.component_system.ComponentComposer;
 import it.volta.ts.pcto.logbookapp.component_system.components.ComponentBase;
+import it.volta.ts.pcto.logbookapp.component_system.components.special_components.SpecialComponents;
 import it.volta.ts.pcto.logbookapp.singleton.QrCodeInfo;
 
 public class ComponentsTestActivity extends Activity {
@@ -32,10 +34,11 @@ public class ComponentsTestActivity extends Activity {
         ((EditText) findViewById(R.id.new_title)).setText(QrCodeInfo.jsonTask.getRootJSON().optString("title"));
         ((EditText) findViewById(R.id.new_info)).setText(QrCodeInfo.jsonTask.getRootJSON().optString("info"));
 
-        ComponentComposer componentComposer = new ComponentComposer();
+        ComponentComposer componentComposer = new ComponentComposer(this);
 
         try {
             componentComposer.readComponentsFromJson(ComponentsTestActivity.this);
+            componentComposer.addViewsToComponents(ComponentsTestActivity.this);
         } catch (JSONException e) {
             Log.e("LogBookError",e.getMessage());
             throw new RuntimeException(e);
@@ -46,41 +49,32 @@ public class ComponentsTestActivity extends Activity {
 
         ArrayList<Button> upbuttonsList = new ArrayList<>();
         ArrayList<Button> downbuttonsList = new ArrayList<>();
+        ArrayList<Button> deletebuttonsList = new ArrayList<>();
+
         findAllButtonsWithTag(findViewById(R.id.components_view), "upbutton", upbuttonsList);
         findAllButtonsWithTag(findViewById(R.id.components_view), "downbutton", downbuttonsList);
+        findAllButtonsWithTag(findViewById(R.id.components_view), "deletebutton", deletebuttonsList);
 
         View.OnClickListener upclickListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                LinearLayout parent = (LinearLayout) view.getParent().getParent();
-                ArrayList<ComponentBase> list = componentComposer.getList();
-
-                if(list.indexOf(parent)==-1 || list.indexOf(parent)-1==-1) return;
-
-                Collections.swap(list, list.indexOf(parent), list.indexOf(parent)-1);
-
-                componentComposer.setList(list);
-
-                componentComposer.removeAllComponentToExistingScrollView(findViewById(R.id.components_view));
-                componentComposer.addComponentsToExistingScrollview(findViewById(R.id.components_view));
-
+                // TODO
             }
         };
 
         View.OnClickListener downclickListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                LinearLayout parent = (LinearLayout) view.getParent().getParent();
-                ArrayList<ComponentBase> list = componentComposer.getList();
+                // TODO
+            }
+        };
 
-                if(list.indexOf(parent)==-1 || list.indexOf(parent)+1==-1) return;
+        View.OnClickListener deleteclickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                View parent = (View) view.getParent().getParent();
 
-                Collections.swap(list, list.indexOf(parent), list.indexOf(parent)+1);
-
-                componentComposer.setList(list);
-
-                componentComposer.removeAllComponentToExistingScrollView(findViewById(R.id.components_view));
-                componentComposer.addComponentsToExistingScrollview(findViewById(R.id.components_view));
+                ((ViewGroup)parent.getParent()).removeView(parent);
             }
         };
 
@@ -88,12 +82,20 @@ public class ComponentsTestActivity extends Activity {
             b.setOnClickListener(upclickListener);
         for (Button b : downbuttonsList)
             b.setOnClickListener(downclickListener);
+        for (Button b : deletebuttonsList)
+            b.setOnClickListener(deleteclickListener);
 
     }
 
     private void findAllButtonsWithTag(View view, String tag, List<Button> buttonList) {
-        if (view instanceof Button && view.getTag().equals(tag)) {
-            buttonList.add((Button) view);
+        if(view == null || tag==null) return;
+
+        if (view.getTag()!=null) {
+            Log.d("LogBookDebug",view.getTag().toString());
+            if(view instanceof Button && view.getTag().toString().equals(tag)) {
+                Log.d("LogBookDebug", "Found");
+                buttonList.add((Button) view);
+            }
         } else if (view instanceof ViewGroup) {
             ViewGroup viewGroup = (ViewGroup) view;
             int childCount = viewGroup.getChildCount();
