@@ -52,6 +52,12 @@ public class ComponentComposer {
         specialComponentsListeners(act);
     }
 
+    public void addView(Context ctx, String type){
+        ComponentBase nComponentBase = resolveType(type);
+        addViewsToComponents(ctx);
+        list.add(nComponentBase);
+    }
+
     private void specialComponentsListeners(Activity act){
         EditText titleRef = (EditText) act.findViewById(R.id.new_title);
         EditText infoRef = (EditText) act.findViewById(R.id.new_info);
@@ -119,6 +125,8 @@ public class ComponentComposer {
 
             String value = jObj.optString("type");
             ComponentBase c = resolveType(value);
+
+            Log.d("LogBookDebug", jObj.optString("type"));
 
             if(c==null) continue;
 
