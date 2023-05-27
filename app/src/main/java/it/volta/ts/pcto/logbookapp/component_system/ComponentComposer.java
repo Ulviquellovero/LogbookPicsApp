@@ -7,12 +7,12 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 
@@ -54,7 +54,7 @@ public class ComponentComposer {
 
     public void addView(Context ctx, String type){
         ComponentBase nComponentBase = resolveType(type);
-        addViewsToComponents(ctx);
+        //addViewsToComponents(ctx);
         list.add(nComponentBase);
     }
 
@@ -141,13 +141,19 @@ public class ComponentComposer {
 
     public void addViewsToComponents(Context ctx){
         for (ComponentBase c : list){
-            c.componentToView(ctx, jsonOnUiUpdate);
+            c.componentToEditableView(ctx, jsonOnUiUpdate);
         }
     }
 
-    public void addComponentsToExistingScrollview(LinearLayout view){
+    public void addComponentsToExistingScrollview(LinearLayout view, Context ctx){
         for (ComponentBase e : list){
-            view.addView(e.getView());
+            if(e == null || ctx==null) continue;
+            if(e.getEditView() == null){
+                addViewsToComponents(ctx);
+
+            }
+            Log.d("LogBookDebug", e.toString());
+            view.addView(e.getEditView());
         }
     }
 
@@ -170,7 +176,58 @@ public class ComponentComposer {
         return new TextLabel();
     }
 
+    public void removeElementByView(LinearLayout rootView, LinearLayout view, Context ctx){
+        for (Iterator<ComponentBase> iterator = list.iterator(); iterator.hasNext();) {
+            ComponentBase c = iterator.next();
+            if(c.getEditView()==view){
+                // remove from list
+                iterator.remove();
+                Log.d("LogBookDebug", list.toString());
+                // remove from view
+                removeAllComponentToExistingScrollView(rootView);
+                addComponentsToExistingScrollview(rootView, ctx);
 
+                // call on componentupdate json
+                try {
+                    jsonOnUiUpdate.componentUpdate(list);
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+    }
+
+    public void moveElement(int moveDirection, LinearLayout rootView, LinearLayout view, Context ctx){
+        for (Iterator<ComponentBase> iterator = list.iterator(); iterator.hasNext();) {
+            ComponentBase c = iterator.next();
+            if(c.getEditView()==view){
+                if(list.indexOf(c)==-1 || list.indexOf(c)+moveDirection==-1) continue;
+
+                Log.d("LogBookDebug", Integer.toString(list.indexOf(c)));
+                Log.d("LogBookDebug", Integer.toString(list.indexOf(c)+moveDirection));
+                try{
+                    Collections.swap(list, list.indexOf(c), list.indexOf(c)+moveDirection);
+                } catch (IndexOutOfBoundsException i){
+                    Log.e("LogBookError", i.toString());
+                }
+
+                // redraw view
+                removeAllComponentToExistingScrollView(rootView);
+                addComponentsToExistingScrollview(rootView, ctx);
+
+                // call on componentupdate json
+                try {
+                    jsonOnUiUpdate.componentUpdate(list);
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
+
+                return;
+            }
+        }
+    }
+
+    // Get & Set
     public ArrayList<ComponentBase> getList() {
         return list;
     }

@@ -8,6 +8,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import it.volta.ts.pcto.logbookapp.component_system.components.ComponentBase;
 import it.volta.ts.pcto.logbookapp.singleton.QrCodeInfo;
@@ -25,14 +26,40 @@ public class JSONOnUiUpdate {
 
         JSONObject parent = json.optJSONObject("GUIdescription");
 
-        Iterator<String> keys = parent.keys();
-
-        while (keys.hasNext()){
-            JSONObject jObj = (JSONObject) parent.get(keys.next());
-            parent.remove(jObj.toString());
+        Iterator<String> iterator = parent.keys();
+        while (iterator.hasNext()) {
+            String key = iterator.next();
+            iterator.remove();
         }
 
         int i = 0;
+        for(ComponentBase componentBase : list){
+            i++;
+            parent.put("component_"+Integer.toString(i), componentBase.componentToJson());
+        }
+
+        QrCodeInfo.postJSON = json;
+        Log.d("LogBookJsonDebug",QrCodeInfo.postJSON.optJSONObject("GUIdescription").toString());
+
+    }
+
+    public void componentUpdate(ArrayList<ComponentBase> newList) throws JSONException {
+        this.list = newList;
+        json = QrCodeInfo.postJSON;
+
+        JSONObject parent = json.optJSONObject("GUIdescription");
+
+
+        Iterator<String> iterator = parent.keys();
+        while (iterator.hasNext()) {
+            String key = iterator.next();
+            iterator.remove();
+        }
+
+        int i = 0;
+
+        Log.d("LogBookJsonDebug", QrCodeInfo.postJSON.optString("GUIdescription").toString());
+
         for(ComponentBase componentBase : list){
             i++;
             parent.put("component_"+Integer.toString(i), componentBase.componentToJson());

@@ -3,16 +3,12 @@ package it.volta.ts.pcto.logbookapp.component_system.components;
 import android.content.Context;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import it.volta.ts.pcto.logbookapp.R;
 import it.volta.ts.pcto.logbookapp.json.JSONOnUiUpdate;
 
 public class TextLabel extends ComponentBase{
@@ -37,15 +33,15 @@ public class TextLabel extends ComponentBase{
     }
 
     @Override
-    public void componentToView(Context ctx, JSONOnUiUpdate jsonOnUiUpdate) {
-        super.view = new LinearLayout(ctx);
-        super.view.setTag(super.compoentTag);
+    public void componentToEditableView(Context ctx, JSONOnUiUpdate jsonOnUiUpdate) {
+        super.editView = new LinearLayout(ctx);
+        super.editView.setTag(super.compoentTag);
 
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);;
-        super.view.setLayoutParams(params);
+        super.editView.setLayoutParams(params);
 
 
-        super.view.setOrientation(LinearLayout.HORIZONTAL);
+        super.editView.setOrientation(LinearLayout.VERTICAL);
 
         // textview
         EditText editText = new EditText(ctx);
@@ -69,8 +65,9 @@ public class TextLabel extends ComponentBase{
             public void afterTextChanged(Editable editable) {}
         });
 
-        super.view.addView(editText);
-        super.view.addView(addMoveUpDownButton(ctx));
+
+        super.editView.addView(editText);
+        super.editView.addView(addMoveUpDownButton(ctx));
 
     }
 

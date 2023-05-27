@@ -3,6 +3,7 @@ package it.volta.ts.pcto.logbookapp.activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -21,11 +22,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import it.volta.ts.pcto.logbookapp.MainActivity;
 import it.volta.ts.pcto.logbookapp.R;
 import it.volta.ts.pcto.logbookapp.component_system.ComponentComposer;
 import it.volta.ts.pcto.logbookapp.component_system.components.ComponentBase;
-import it.volta.ts.pcto.logbookapp.component_system.components.special_components.SpecialComponents;
+
 import it.volta.ts.pcto.logbookapp.singleton.QrCodeInfo;
+import it.volta.ts.pcto.logbookapp.utils.ViewUtils;
 
 public class ComponentsTestActivity extends Activity {
     private String type;
@@ -60,7 +63,7 @@ public class ComponentsTestActivity extends Activity {
             throw new RuntimeException(e);
         }
 
-        componentComposer.addComponentsToExistingScrollview(findViewById(R.id.components_view));
+        componentComposer.addComponentsToExistingScrollview(findViewById(R.id.components_view), ComponentsTestActivity.this);
 
         dropdown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -103,69 +106,70 @@ public class ComponentsTestActivity extends Activity {
             public void onNothingSelected(AdapterView<?> adapterView) {}
         });
 
-        ArrayList<Button> upbuttonsList = new ArrayList<>();
-        ArrayList<Button> downbuttonsList = new ArrayList<>();
-        ArrayList<Button> deletebuttonsList = new ArrayList<>();
-
-        findAllButtonsWithTag(findViewById(R.id.components_view), "upbutton", upbuttonsList);
-        findAllButtonsWithTag(findViewById(R.id.components_view), "downbutton", downbuttonsList);
-        findAllButtonsWithTag(findViewById(R.id.components_view), "deletebutton", deletebuttonsList);
-
+        ((Button)findViewById(R.id.proceed)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ComponentsTestActivity.this, PostActivity.class));
+            }
+        });
 
         ((Button) findViewById(R.id.add_component)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 componentComposer.addView(ComponentsTestActivity.this, type);
+                Log.d("LogBookDebug", componentComposer.getList().toString());
                 componentComposer.removeAllComponentToExistingScrollView(findViewById(R.id.components_view));
-                componentComposer.addComponentsToExistingScrollview(findViewById(R.id.components_view));
+                componentComposer.addComponentsToExistingScrollview(findViewById(R.id.components_view),ComponentsTestActivity.this);
+
+                // add new buttons
+                scanNewControlButtons(componentComposer);
             }
         });
+        // ---------
+
+        scanNewControlButtons(componentComposer);
+
+    }
+
+    private void scanNewControlButtons(ComponentComposer componentComposer){
+        ArrayList<View> upbuttonsList = ViewUtils.getViewsByTag(findViewById(R.id.components_view), "upbutton");
+        ArrayList<View> downbuttonsList = ViewUtils.getViewsByTag(findViewById(R.id.components_view), "downbutton");
+        ArrayList<View> deletebuttonsList = ViewUtils.getViewsByTag(findViewById(R.id.components_view), "deletebutton");
+
+
         View.OnClickListener upclickListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO
+                Log.d("LogBookDebug", "onMoveUp");
+                LinearLayout parent = (LinearLayout) view.getParent().getParent();
+                componentComposer.moveElement(-1, findViewById(R.id.components_view), parent, ComponentsTestActivity.this);
             }
         };
 
         View.OnClickListener downclickListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO
+                Log.d("LogBookDebug", "onMoveDown");
+                LinearLayout parent = (LinearLayout) view.getParent().getParent();
+                componentComposer.moveElement(1 ,findViewById(R.id.components_view), parent, ComponentsTestActivity.this);
             }
         };
 
         View.OnClickListener deleteclickListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                View parent = (View) view.getParent().getParent();
-
-                ((ViewGroup)parent.getParent()).removeView(parent);
+                Log.d("LogBookDebug", "onDelete");
+                LinearLayout parent = (LinearLayout) view.getParent().getParent();
+                componentComposer.removeElementByView(findViewById(R.id.components_view), parent, ComponentsTestActivity.this);
             }
         };
 
-        for(Button b : upbuttonsList)
+        for(View b : upbuttonsList)
             b.setOnClickListener(upclickListener);
-        for (Button b : downbuttonsList)
+        for (View b : downbuttonsList)
             b.setOnClickListener(downclickListener);
-        for (Button b : deletebuttonsList)
+        for (View b : deletebuttonsList)
             b.setOnClickListener(deleteclickListener);
-
     }
 
-    private void findAllButtonsWithTag(View view, String tag, List<Button> buttonList) {
-        if(view == null || tag==null) return;
-
-        if (view.getTag()!=null) {
-            if(view instanceof Button && view.getTag().toString().equals(tag)) {
-                buttonList.add((Button) view);
-            }
-        } else if (view instanceof ViewGroup) {
-            ViewGroup viewGroup = (ViewGroup) view;
-            int childCount = viewGroup.getChildCount();
-            for (int i = 0; i < childCount; i++) {
-                View childView = viewGroup.getChildAt(i);
-                findAllButtonsWithTag(childView, tag, buttonList);
-            }
-        }
-    }
 }

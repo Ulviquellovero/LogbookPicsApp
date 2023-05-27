@@ -11,6 +11,8 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONObject;
 
+import it.volta.ts.pcto.logbookapp.singleton.QrCodeInfo;
+
 public class JSONTask
 {
     private JSONObject root;
@@ -29,15 +31,15 @@ public class JSONTask
         this.volleyQueue = Volley.newRequestQueue(this.ctx);
     }
 
-    // TEST: this is for testing purposes, we're uploading the same JSON file we recieved from the GET request here
+    // method is now posting the new json
     public void uploadJSON(String url, final JSONCallback callback){
         // provided a json has been loaded in the first place
-        if (root==null){
-            Log.d(this.getClass().getSimpleName().toString(), "Root JSON object is null");
+        if (QrCodeInfo.postJSON ==null){
+            Log.e(this.getClass().getSimpleName().toString(), "Root JSON object is null");
             return;
         }
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, root,
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, QrCodeInfo.postJSON,
                     res ->{
                         // callback
                         Log.d(this.getClass().getSimpleName().toString(), "JSON posted successfully");

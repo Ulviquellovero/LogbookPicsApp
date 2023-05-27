@@ -1,16 +1,15 @@
 package it.volta.ts.pcto.logbookapp.component_system.components;
 
-import android.app.ActionBar;
 import android.content.Context;
-import android.view.Gravity;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import it.volta.ts.pcto.logbookapp.R;
 import it.volta.ts.pcto.logbookapp.json.JSONOnUiUpdate;
 
 public class CheckBox extends ComponentBase{
@@ -36,15 +35,14 @@ public class CheckBox extends ComponentBase{
     }
 
     @Override
-    public void componentToView(Context ctx, JSONOnUiUpdate jsonOnUiUpdate) {
-        super.view = new LinearLayout(ctx);
+    public void componentToEditableView(Context ctx, JSONOnUiUpdate jsonOnUiUpdate) {
+        super.editView = new LinearLayout(ctx);
 
-        super.view.setTag(super.compoentTag);
-        // TODO: set id somehow
+        super.editView.setTag(super.compoentTag);
 
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);;
-        super.view.setLayoutParams(params);
-        super.view.setOrientation(LinearLayout.HORIZONTAL);
+        super.editView.setLayoutParams(params);
+        super.editView.setOrientation(LinearLayout.VERTICAL);
 
         // check box
         android.widget.CheckBox checkBox = new android.widget.CheckBox(ctx);
@@ -53,10 +51,44 @@ public class CheckBox extends ComponentBase{
         EditText et =new EditText(ctx);
         et.setText(value);
 
+        et.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
-        super.view.addView(checkBox);
-        super.view.addView(et);
-        super.view.addView(addMoveUpDownButton(ctx));
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                value = charSequence.toString();
+
+                try {
+                    jsonOnUiUpdate.componentUpdate();
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+
+
+            @Override
+            public void afterTextChanged(Editable editable) {}
+        });
+
+        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                onOff = b;
+
+                try {
+                    jsonOnUiUpdate.componentUpdate();
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+
+
+
+        super.editView.addView(checkBox);
+        super.editView.addView(et);
+        super.editView.addView(addMoveUpDownButton(ctx));
     }
 
     @Override

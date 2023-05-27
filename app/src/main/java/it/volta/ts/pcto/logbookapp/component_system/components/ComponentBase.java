@@ -1,29 +1,22 @@
 package it.volta.ts.pcto.logbookapp.component_system.components;
 
 import android.content.Context;
-import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-
-import it.volta.ts.pcto.logbookapp.R;
 import it.volta.ts.pcto.logbookapp.json.JSONOnUiUpdate;
 
 public abstract class ComponentBase {
     public ComponentType componentType;
-    protected LinearLayout view;
+    protected LinearLayout editView;
     protected String value;
     protected String compoentTag;
 
     public abstract void setFields(JSONObject jObj);
-    public abstract void componentToView(Context ctx, JSONOnUiUpdate jsonOnUiUpdate);
+    public abstract void componentToEditableView(Context ctx, JSONOnUiUpdate jsonOnUiUpdate);
 
     public abstract JSONObject componentToJson() throws JSONException;
 
@@ -54,8 +47,8 @@ public abstract class ComponentBase {
         return componentType;
     }
 
-    public LinearLayout getView() {
-        return view;
+    public LinearLayout getEditView() {
+        return editView;
     }
 
     public String getValue() {
