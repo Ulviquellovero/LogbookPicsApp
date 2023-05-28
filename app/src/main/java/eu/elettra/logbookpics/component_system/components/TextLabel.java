@@ -1,26 +1,23 @@
-package it.volta.ts.pcto.logbookapp.component_system.components;
+package eu.elettra.logbookpics.component_system.components;
 
 import android.content.Context;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import it.volta.ts.pcto.logbookapp.json.JSONOnUiUpdate;
+import eu.elettra.logbookpics.json.JSONOnUiUpdate;
 
-public class BullettedList extends ComponentBase{
+public class TextLabel extends ComponentBase{
     private String value;
-    private String prefix;
 
-    public BullettedList() {
+    public TextLabel() {
         super();
-        super.componentType = ComponentType.BULLETTEDLIST;
-        super.compoentTag = "bulletedlist";
-        this.prefix = " · ";
+        super.componentType = ComponentType.TEXTLABEL;
+        super.compoentTag = "textlabel";
     }
 
     public String getValue() {
@@ -33,7 +30,7 @@ public class BullettedList extends ComponentBase{
 
     @Override
     public void setFields(JSONObject jObj) {
-        this.value = jObj.optString("title", "Field 'title' not found");
+        this.value = jObj.optString("title");
     }
 
     @Override
@@ -46,23 +43,13 @@ public class BullettedList extends ComponentBase{
 
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);;
         super.editView.setLayoutParams(params);
+
+
         super.editView.setOrientation(LinearLayout.VERTICAL);
 
-        // container
-        LinearLayout container = new LinearLayout(ctx);
-        container.setLayoutParams(params);
-        container.setOrientation(LinearLayout.HORIZONTAL);
-
-        TextView tv = new TextView(ctx);
-        tv.setText(prefix);
-
+        // textview
         EditText editText = new EditText(ctx);
         editText.setText(value);
-
-
-        container.addView(tv);
-        container.addView(editText);
-        //
 
         editText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -71,7 +58,6 @@ public class BullettedList extends ComponentBase{
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 value = charSequence.toString();
-
                 try {
                     jsonOnUiUpdate.componentUpdate();
                 } catch (JSONException e) {
@@ -83,17 +69,20 @@ public class BullettedList extends ComponentBase{
             public void afterTextChanged(Editable editable) {}
         });
 
-        super.editView.addView(container);
+
+        super.editView.addView(editText);
         super.editView.addView(addMoveUpDownButton(ctx));
+
     }
 
     @Override
     public JSONObject componentToJson() throws JSONException {
         JSONObject component = new JSONObject();
-
-        component.put("type", "list");
+        component.put("type", "text");
         component.put("title", value);
+        component.put("default", "Insert text here");
 
         return component;
     }
+
 }

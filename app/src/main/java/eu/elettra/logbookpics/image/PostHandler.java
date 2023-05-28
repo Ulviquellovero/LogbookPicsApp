@@ -1,12 +1,12 @@
-package it.volta.ts.pcto.logbookapp.image;
+package eu.elettra.logbookpics.image;
 
 import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
-import it.volta.ts.pcto.logbookapp.json.JSONTask;
-import it.volta.ts.pcto.logbookapp.singleton.QrCodeInfo;
+import eu.elettra.logbookpics.json.JSONTask;
+import eu.elettra.logbookpics.singleton.QrCodeInfo;
 
 // TODO: This is a temporary position and it might be moved in the future
 public class PostHandler {

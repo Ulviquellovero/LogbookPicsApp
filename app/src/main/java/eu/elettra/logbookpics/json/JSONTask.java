@@ -1,4 +1,4 @@
-package it.volta.ts.pcto.logbookapp.json;
+package eu.elettra.logbookpics.json;
 
 import android.content.Context;
 import android.util.Log;
@@ -11,7 +11,7 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONObject;
 
-import it.volta.ts.pcto.logbookapp.singleton.QrCodeInfo;
+import eu.elettra.logbookpics.singleton.QrCodeInfo;
 
 public class JSONTask
 {

@@ -1,4 +1,4 @@
-package it.volta.ts.pcto.logbookapp.component_system.components;
+package eu.elettra.logbookpics.component_system.components;
 
 import android.content.Context;
 import android.widget.Button;
@@ -7,7 +7,7 @@ import android.widget.LinearLayout;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import it.volta.ts.pcto.logbookapp.json.JSONOnUiUpdate;
+import eu.elettra.logbookpics.json.JSONOnUiUpdate;
 
 public abstract class ComponentBase {
     public ComponentType componentType;

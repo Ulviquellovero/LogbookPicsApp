@@ -1,24 +1,26 @@
-package it.volta.ts.pcto.logbookapp.component_system.components;
+package eu.elettra.logbookpics.component_system.components;
 
 import android.content.Context;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import it.volta.ts.pcto.logbookapp.json.JSONOnUiUpdate;
+import eu.elettra.logbookpics.json.JSONOnUiUpdate;
 
-public class CheckBox extends ComponentBase{
-    public String value;
-    public boolean onOff;
-    public CheckBox() {
+public class BullettedList extends ComponentBase{
+    private String value;
+    private String prefix;
+
+    public BullettedList() {
         super();
-        super.componentType = ComponentType.CHECKBOX;
-        super.compoentTag = "checkbox";
+        super.componentType = ComponentType.BULLETTEDLIST;
+        super.compoentTag = "bulletedlist";
+        this.prefix = " · ";
     }
 
     public String getValue() {
@@ -31,14 +33,12 @@ public class CheckBox extends ComponentBase{
 
     @Override
     public void setFields(JSONObject jObj) {
-        value = jObj.optString("title", "Field 'title' not found");
-        onOff = jObj.optBoolean("default", false);
+        this.value = jObj.optString("title", "Field 'title' not found");
     }
 
     @Override
     public void componentToEditableView(Context ctx, JSONOnUiUpdate jsonOnUiUpdate) {
         super.editView = new LinearLayout(ctx);
-
         super.editView.setTag(super.compoentTag);
 
         // View UUID
@@ -48,14 +48,23 @@ public class CheckBox extends ComponentBase{
         super.editView.setLayoutParams(params);
         super.editView.setOrientation(LinearLayout.VERTICAL);
 
-        // check box
-        android.widget.CheckBox checkBox = new android.widget.CheckBox(ctx);
-        checkBox.setChecked(onOff);
+        // container
+        LinearLayout container = new LinearLayout(ctx);
+        container.setLayoutParams(params);
+        container.setOrientation(LinearLayout.HORIZONTAL);
 
-        EditText et =new EditText(ctx);
-        et.setText(value);
+        TextView tv = new TextView(ctx);
+        tv.setText(prefix);
 
-        et.addTextChangedListener(new TextWatcher() {
+        EditText editText = new EditText(ctx);
+        editText.setText(value);
+
+
+        container.addView(tv);
+        container.addView(editText);
+        //
+
+        editText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
@@ -70,28 +79,11 @@ public class CheckBox extends ComponentBase{
                 }
             }
 
-
             @Override
             public void afterTextChanged(Editable editable) {}
         });
 
-        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                onOff = b;
-
-                try {
-                    jsonOnUiUpdate.componentUpdate();
-                } catch (JSONException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        });
-
-
-
-        super.editView.addView(checkBox);
-        super.editView.addView(et);
+        super.editView.addView(container);
         super.editView.addView(addMoveUpDownButton(ctx));
     }
 
@@ -99,9 +91,8 @@ public class CheckBox extends ComponentBase{
     public JSONObject componentToJson() throws JSONException {
         JSONObject component = new JSONObject();
 
-        component.put("type", "checkbox");
+        component.put("type", "list");
         component.put("title", value);
-        component.put("default", onOff);
 
         return component;
     }

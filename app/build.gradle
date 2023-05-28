@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace 'it.volta.ts.pcto.logbookapp'
+    namespace 'eu.elettra.logbookpics'
     compileSdk 33
 
     defaultConfig {
-        applicationId "it.volta.ts.pcto.logbookapp"
+        applicationId "eu.elettra.logbookpics"
         minSdk 24
         targetSdk 33
         versionCode 1

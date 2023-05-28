@@ -1,4 +1,4 @@
-package it.volta.ts.pcto.logbookapp.image;
+package eu.elettra.logbookpics.image;
 
 import android.app.Activity;
 import android.content.Context;
@@ -7,13 +7,12 @@ import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.widget.ImageView;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Base64;
 
-import it.volta.ts.pcto.logbookapp.json.JSONTask;
-import it.volta.ts.pcto.logbookapp.singleton.QrCodeInfo;
+import eu.elettra.logbookpics.json.JSONTask;
+import eu.elettra.logbookpics.singleton.QrCodeInfo;
 
 public class ImageRenderer {
 

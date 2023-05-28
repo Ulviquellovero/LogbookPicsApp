@@ -1,6 +1,6 @@
-package it.volta.ts.pcto.logbookapp;
-import it.volta.ts.pcto.logbookapp.activities.PreviewActivity;
-import it.volta.ts.pcto.logbookapp.singleton.QrCodeInfo;
+package eu.elettra.logbookpics;
+import eu.elettra.logbookpics.activities.PreviewActivity;
+import eu.elettra.logbookpics.singleton.QrCodeInfo;
 
 import android.Manifest;
 import android.app.Activity;

@@ -1,10 +1,10 @@
-package it.volta.ts.pcto.logbookapp.singleton;
+package eu.elettra.logbookpics.singleton;
 
 import android.graphics.Bitmap;
 
 import org.json.JSONObject;
 
-import it.volta.ts.pcto.logbookapp.json.JSONTask;
+import eu.elettra.logbookpics.json.JSONTask;
 
 public class QrCodeInfo {
     public static String url;

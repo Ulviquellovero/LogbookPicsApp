@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="it.volta.ts.pcto.logbookapp.activities.FirstFragment"
+        android:name="eu.elettra.logbookpics.activities.FirstFragment"
         android:label="@string/first_fragment_label"
         tools:layout="@layout/fragment_first">
 
@@ -17,7 +17,7 @@
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
-        android:name="it.volta.ts.pcto.logbookapp.activities.SecondFragment"
+        android:name="eu.elettra.logbookpics.activities.SecondFragment"
         android:label="@string/second_fragment_label"
         tools:layout="@layout/fragment_second">
 

@@ -1,17 +1,15 @@
-package it.volta.ts.pcto.logbookapp.json;
+package eu.elettra.logbookpics.json;
 
 import android.util.Log;
-import android.view.ViewGroup;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
-import it.volta.ts.pcto.logbookapp.component_system.components.ComponentBase;
-import it.volta.ts.pcto.logbookapp.singleton.QrCodeInfo;
+import eu.elettra.logbookpics.component_system.components.ComponentBase;
+import eu.elettra.logbookpics.singleton.QrCodeInfo;
 
 public class JSONOnUiUpdate {
     private ArrayList<ComponentBase> list;

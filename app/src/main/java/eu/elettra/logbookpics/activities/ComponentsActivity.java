@@ -1,4 +1,4 @@
-package it.volta.ts.pcto.logbookapp.activities;
+package eu.elettra.logbookpics.activities;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -16,11 +16,11 @@ import org.json.JSONException;
 
 import java.util.ArrayList;
 
-import it.volta.ts.pcto.logbookapp.R;
-import it.volta.ts.pcto.logbookapp.component_system.ComponentComposer;
+import eu.elettra.logbookpics.R;
+import eu.elettra.logbookpics.component_system.ComponentComposer;
 
-import it.volta.ts.pcto.logbookapp.singleton.QrCodeInfo;
-import it.volta.ts.pcto.logbookapp.utils.ViewUtils;
+import eu.elettra.logbookpics.singleton.QrCodeInfo;
+import eu.elettra.logbookpics.utils.ViewUtils;
 
 public class ComponentsActivity extends Activity {
     private String type;

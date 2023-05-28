@@ -1,4 +1,4 @@
-package it.volta.ts.pcto.logbookapp.component_system.components;
+package eu.elettra.logbookpics.component_system.components;
 
 public enum ComponentType {
     TEXTLABEL,

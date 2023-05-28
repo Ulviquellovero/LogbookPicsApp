@@ -1,4 +1,4 @@
-package it.volta.ts.pcto.logbookapp.component_system;
+package eu.elettra.logbookpics.component_system;
 
 import android.app.Activity;
 import android.content.Context;
@@ -16,14 +16,14 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 
-import it.volta.ts.pcto.logbookapp.R;
-import it.volta.ts.pcto.logbookapp.component_system.components.BullettedList;
-import it.volta.ts.pcto.logbookapp.component_system.components.CheckBox;
-import it.volta.ts.pcto.logbookapp.component_system.components.ComponentBase;
-import it.volta.ts.pcto.logbookapp.component_system.components.ComponentType;
-import it.volta.ts.pcto.logbookapp.component_system.components.TextLabel;
-import it.volta.ts.pcto.logbookapp.json.JSONOnUiUpdate;
-import it.volta.ts.pcto.logbookapp.singleton.QrCodeInfo;
+import eu.elettra.logbookpics.R;
+import eu.elettra.logbookpics.component_system.components.BullettedList;
+import eu.elettra.logbookpics.component_system.components.CheckBox;
+import eu.elettra.logbookpics.component_system.components.ComponentBase;
+import eu.elettra.logbookpics.component_system.components.ComponentType;
+import eu.elettra.logbookpics.component_system.components.TextLabel;
+import eu.elettra.logbookpics.json.JSONOnUiUpdate;
+import eu.elettra.logbookpics.singleton.QrCodeInfo;
 
 public class ComponentComposer {
 

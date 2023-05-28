@@ -1,4 +1,4 @@
-package it.volta.ts.pcto.logbookapp.activities;
+package eu.elettra.logbookpics.activities;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -6,11 +6,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import it.volta.ts.pcto.logbookapp.R;
-import it.volta.ts.pcto.logbookapp.image.ImageRenderer;
-import it.volta.ts.pcto.logbookapp.image.PostHandler;
-import it.volta.ts.pcto.logbookapp.json.JSONTask;
-import it.volta.ts.pcto.logbookapp.singleton.QrCodeInfo;
+import eu.elettra.logbookpics.R;
+import eu.elettra.logbookpics.image.ImageRenderer;
+import eu.elettra.logbookpics.image.PostHandler;
+import eu.elettra.logbookpics.json.JSONTask;
+import eu.elettra.logbookpics.singleton.QrCodeInfo;
 
 public class PreviewActivity extends Activity {
 

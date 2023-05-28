@@ -1,4 +1,4 @@
-package it.volta.ts.pcto.logbookapp.utils;
+package eu.elettra.logbookpics.utils;
 
 import android.view.View;
 import android.view.ViewGroup;
