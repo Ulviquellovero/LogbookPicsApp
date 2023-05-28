@@ -1,36 +1,28 @@
 package it.volta.ts.pcto.logbookapp.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.Spinner;
 
 import org.json.JSONException;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
-import it.volta.ts.pcto.logbookapp.MainActivity;
 import it.volta.ts.pcto.logbookapp.R;
 import it.volta.ts.pcto.logbookapp.component_system.ComponentComposer;
-import it.volta.ts.pcto.logbookapp.component_system.components.ComponentBase;
 
 import it.volta.ts.pcto.logbookapp.singleton.QrCodeInfo;
 import it.volta.ts.pcto.logbookapp.utils.ViewUtils;
 
-public class ComponentsTestActivity extends Activity {
+public class ComponentsActivity extends Activity {
     private String type;
 
     @Override
@@ -56,14 +48,14 @@ public class ComponentsTestActivity extends Activity {
         ComponentComposer componentComposer = new ComponentComposer(this);
 
         try {
-            componentComposer.readComponentsFromJson(ComponentsTestActivity.this);
-            componentComposer.addViewsToComponents(ComponentsTestActivity.this);
+            componentComposer.readComponentsFromJson(ComponentsActivity.this);
+            componentComposer.addViewsToComponents(ComponentsActivity.this);
         } catch (JSONException e) {
             Log.e("LogBookError",e.getMessage());
             throw new RuntimeException(e);
         }
 
-        componentComposer.addComponentsToExistingScrollview(findViewById(R.id.components_view), ComponentsTestActivity.this);
+        componentComposer.addComponentsToExistingScrollview(findViewById(R.id.components_view), ComponentsActivity.this);
 
         dropdown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -77,11 +69,6 @@ public class ComponentsTestActivity extends Activity {
                     case 1:{
                         Log.d("LogBookDebug", "Checkbox");
                         type="checkbox";
-                        /*
-                        componentComposer.addView(ComponentsTestActivity.this, "checkbox");
-                        componentComposer.removeAllComponentToExistingScrollView(findViewById(R.id.components_view));
-                        componentComposer.addComponentsToExistingScrollview(findViewById(R.id.components_view));
-                        */
                         break;
                     }
                     case 2:{
@@ -109,22 +96,33 @@ public class ComponentsTestActivity extends Activity {
         ((Button)findViewById(R.id.proceed)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(ComponentsTestActivity.this, PostActivity.class));
+                startActivity(new Intent(ComponentsActivity.this, PostActivity.class));
+            }
+        });
+
+        ((Button) findViewById(R.id.undo)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // TODO: implement function
+                componentComposer.resetAllChanges();
             }
         });
 
         ((Button) findViewById(R.id.add_component)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                componentComposer.addView(ComponentsTestActivity.this, type);
+                componentComposer.addView(ComponentsActivity.this, type);
                 Log.d("LogBookDebug", componentComposer.getList().toString());
                 componentComposer.removeAllComponentToExistingScrollView(findViewById(R.id.components_view));
-                componentComposer.addComponentsToExistingScrollview(findViewById(R.id.components_view),ComponentsTestActivity.this);
+                componentComposer.addComponentsToExistingScrollview(findViewById(R.id.components_view), ComponentsActivity.this);
 
                 // add new buttons
                 scanNewControlButtons(componentComposer);
             }
         });
+
+
+
         // ---------
 
         scanNewControlButtons(componentComposer);
@@ -142,7 +140,10 @@ public class ComponentsTestActivity extends Activity {
             public void onClick(View view) {
                 Log.d("LogBookDebug", "onMoveUp");
                 LinearLayout parent = (LinearLayout) view.getParent().getParent();
-                componentComposer.moveElement(-1, findViewById(R.id.components_view), parent, ComponentsTestActivity.this);
+                componentComposer.moveElement(-1, findViewById(R.id.components_view), parent, ComponentsActivity.this);
+
+                // for some reasons this has to be done, otherwise the buttons stop working
+                scanNewControlButtons(componentComposer);
             }
         };
 
@@ -151,7 +152,10 @@ public class ComponentsTestActivity extends Activity {
             public void onClick(View view) {
                 Log.d("LogBookDebug", "onMoveDown");
                 LinearLayout parent = (LinearLayout) view.getParent().getParent();
-                componentComposer.moveElement(1 ,findViewById(R.id.components_view), parent, ComponentsTestActivity.this);
+                componentComposer.moveElement(1 ,findViewById(R.id.components_view), parent, ComponentsActivity.this);
+
+                // for some reasons this has to be done, otherwise the buttons stop working
+                scanNewControlButtons(componentComposer);
             }
         };
 
@@ -160,7 +164,10 @@ public class ComponentsTestActivity extends Activity {
             public void onClick(View view) {
                 Log.d("LogBookDebug", "onDelete");
                 LinearLayout parent = (LinearLayout) view.getParent().getParent();
-                componentComposer.removeElementByView(findViewById(R.id.components_view), parent, ComponentsTestActivity.this);
+                componentComposer.removeElementByView(findViewById(R.id.components_view), parent, ComponentsActivity.this);
+
+                // for some reasons this has to be done, otherwise the buttons stop working
+                scanNewControlButtons(componentComposer);
             }
         };
 

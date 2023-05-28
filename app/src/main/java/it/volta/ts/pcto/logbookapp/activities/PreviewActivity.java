@@ -1,21 +1,12 @@
 package it.volta.ts.pcto.logbookapp.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Debug;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
-import org.json.JSONObject;
-import org.w3c.dom.Text;
-
-import it.volta.ts.pcto.logbookapp.MainActivity;
 import it.volta.ts.pcto.logbookapp.R;
-import it.volta.ts.pcto.logbookapp.component_system.ComponentComposer;
 import it.volta.ts.pcto.logbookapp.image.ImageRenderer;
 import it.volta.ts.pcto.logbookapp.image.PostHandler;
 import it.volta.ts.pcto.logbookapp.json.JSONTask;
@@ -52,7 +43,7 @@ public class PreviewActivity extends Activity {
                 testComponents.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        startActivity(new Intent(PreviewActivity.this, ComponentsTestActivity.class));
+                        startActivity(new Intent(PreviewActivity.this, ComponentsActivity.class));
                     }
                 });
             }

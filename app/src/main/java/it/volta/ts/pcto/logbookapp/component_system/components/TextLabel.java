@@ -15,6 +15,7 @@ public class TextLabel extends ComponentBase{
     private String value;
 
     public TextLabel() {
+        super();
         super.componentType = ComponentType.TEXTLABEL;
         super.compoentTag = "textlabel";
     }
@@ -36,6 +37,9 @@ public class TextLabel extends ComponentBase{
     public void componentToEditableView(Context ctx, JSONOnUiUpdate jsonOnUiUpdate) {
         super.editView = new LinearLayout(ctx);
         super.editView.setTag(super.compoentTag);
+
+        // View UUID
+        super.editView.setId(this.hashCode());
 
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);;
         super.editView.setLayoutParams(params);

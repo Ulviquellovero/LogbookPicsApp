@@ -17,6 +17,7 @@ public class BullettedList extends ComponentBase{
     private String prefix;
 
     public BullettedList() {
+        super();
         super.componentType = ComponentType.BULLETTEDLIST;
         super.compoentTag = "bulletedlist";
         this.prefix = " · ";
@@ -39,6 +40,9 @@ public class BullettedList extends ComponentBase{
     public void componentToEditableView(Context ctx, JSONOnUiUpdate jsonOnUiUpdate) {
         super.editView = new LinearLayout(ctx);
         super.editView.setTag(super.compoentTag);
+
+        // View UUID
+        super.editView.setId(this.hashCode());
 
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);;
         super.editView.setLayoutParams(params);

@@ -179,7 +179,8 @@ public class ComponentComposer {
     public void removeElementByView(LinearLayout rootView, LinearLayout view, Context ctx){
         for (Iterator<ComponentBase> iterator = list.iterator(); iterator.hasNext();) {
             ComponentBase c = iterator.next();
-            if(c.getEditView()==view){
+            Log.d("LogBookTest", Integer.toString(c.getUuid()) + " "+ Integer.toString(view.getId()));
+            if(c.getUuid()==view.getId()){
                 // remove from list
                 iterator.remove();
                 Log.d("LogBookDebug", list.toString());
@@ -197,10 +198,14 @@ public class ComponentComposer {
         }
     }
 
+    public void resetAllChanges(){
+        // TODO
+    }
     public void moveElement(int moveDirection, LinearLayout rootView, LinearLayout view, Context ctx){
         for (Iterator<ComponentBase> iterator = list.iterator(); iterator.hasNext();) {
             ComponentBase c = iterator.next();
-            if(c.getEditView()==view){
+            if(c.getUuid()==view.getId()){
+
                 if(list.indexOf(c)==-1 || list.indexOf(c)+moveDirection==-1) continue;
 
                 Log.d("LogBookDebug", Integer.toString(list.indexOf(c)));
