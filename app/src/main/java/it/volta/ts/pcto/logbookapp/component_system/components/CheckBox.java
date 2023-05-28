@@ -16,6 +16,7 @@ public class CheckBox extends ComponentBase{
     public String value;
     public boolean onOff;
     public CheckBox() {
+        super();
         super.componentType = ComponentType.CHECKBOX;
         super.compoentTag = "checkbox";
     }
@@ -39,6 +40,9 @@ public class CheckBox extends ComponentBase{
         super.editView = new LinearLayout(ctx);
 
         super.editView.setTag(super.compoentTag);
+
+        // View UUID
+        super.editView.setId(this.hashCode());
 
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);;
         super.editView.setLayoutParams(params);

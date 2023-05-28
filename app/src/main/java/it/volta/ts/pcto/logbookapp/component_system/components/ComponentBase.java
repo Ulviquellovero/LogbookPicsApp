@@ -15,6 +15,12 @@ public abstract class ComponentBase {
     protected String value;
     protected String compoentTag;
 
+    protected int uuid;
+
+    public ComponentBase() {
+        this.uuid = this.hashCode();
+    }
+
     public abstract void setFields(JSONObject jObj);
     public abstract void componentToEditableView(Context ctx, JSONOnUiUpdate jsonOnUiUpdate);
 
@@ -61,5 +67,9 @@ public abstract class ComponentBase {
 
     public String getCompoentTag() {
         return compoentTag;
+    }
+
+    public int getUuid() {
+        return uuid;
     }
 }
