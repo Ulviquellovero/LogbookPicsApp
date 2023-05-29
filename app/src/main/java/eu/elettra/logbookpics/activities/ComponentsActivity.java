@@ -96,7 +96,7 @@ public class ComponentsActivity extends Activity {
         ((Button)findViewById(R.id.proceed)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(ComponentsActivity.this, PostActivity.class));
+                startActivity(new Intent(ComponentsActivity.this, UploadPreviewActivity.class));
             }
         });
 

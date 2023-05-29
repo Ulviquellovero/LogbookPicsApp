@@ -101,20 +101,7 @@ public class ComponentComposer {
 
     }
 
-    /*
-    public void readComponentsFromJson(Context ctx) throws JSONException {
-        JSONArray componentList = root.getJSONArray("GUIdescription");
 
-        for(int i=0; i<componentList.length();i++){
-            JSONObject jObj = componentList.getJSONObject(i);
-            String value = jObj.optString("type");
-            ComponentBase c = resolveType(value);
-            c.setFields(jObj);
-            c.componentToView(ctx);
-            this.list.add(c);
-        }
-    }
-    */
     public void readComponentsFromJson(Context ctx) throws JSONException {
         JSONObject componentList = root.optJSONObject("GUIdescription");
 
@@ -230,6 +217,10 @@ public class ComponentComposer {
                 return;
             }
         }
+    }
+
+    public static void addPrettyViewsToComponents(Context ctx){
+
     }
 
     // Get & Set
