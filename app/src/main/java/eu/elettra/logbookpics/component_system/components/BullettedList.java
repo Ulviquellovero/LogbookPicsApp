@@ -88,6 +88,16 @@ public class BullettedList extends ComponentBase{
     }
 
     @Override
+    public void componentToPrettyView(Context ctx) {
+        super.prettyView = new LinearLayout(ctx);
+
+        TextView tv = new TextView(ctx);
+        tv.setText(" · "+value);
+
+        super.prettyView.addView(tv);
+    }
+
+    @Override
     public JSONObject componentToJson() throws JSONException {
         JSONObject component = new JSONObject();
 

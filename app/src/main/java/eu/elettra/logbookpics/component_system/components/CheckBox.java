@@ -6,6 +6,7 @@ import android.text.TextWatcher;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -93,6 +94,18 @@ public class CheckBox extends ComponentBase{
         super.editView.addView(checkBox);
         super.editView.addView(et);
         super.editView.addView(addMoveUpDownButton(ctx));
+    }
+
+    @Override
+    public void componentToPrettyView(Context ctx) {
+        super.prettyView = new LinearLayout(ctx);
+
+        android.widget.CheckBox checkBox = new android.widget.CheckBox(ctx);
+        checkBox.setChecked(onOff);
+        checkBox.setText(value);
+        checkBox.setClickable(false);
+
+        super.prettyView.addView(checkBox);
     }
 
     @Override

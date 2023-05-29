@@ -5,6 +5,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -73,6 +74,16 @@ public class TextLabel extends ComponentBase{
         super.editView.addView(editText);
         super.editView.addView(addMoveUpDownButton(ctx));
 
+    }
+
+    @Override
+    public void componentToPrettyView(Context ctx) {
+        super.prettyView = new LinearLayout(ctx);
+
+        TextView tv = new TextView(ctx);
+        tv.setText(value);
+
+        super.prettyView.addView(tv);
     }
 
     @Override

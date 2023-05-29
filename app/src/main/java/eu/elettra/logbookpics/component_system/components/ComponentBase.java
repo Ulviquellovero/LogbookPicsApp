@@ -12,6 +12,7 @@ import eu.elettra.logbookpics.json.JSONOnUiUpdate;
 public abstract class ComponentBase {
     public ComponentType componentType;
     protected LinearLayout editView;
+    protected LinearLayout prettyView;
     protected String value;
     protected String compoentTag;
 
@@ -23,6 +24,7 @@ public abstract class ComponentBase {
 
     public abstract void setFields(JSONObject jObj);
     public abstract void componentToEditableView(Context ctx, JSONOnUiUpdate jsonOnUiUpdate);
+    public abstract void componentToPrettyView(Context ctx);
 
     public abstract JSONObject componentToJson() throws JSONException;
 
@@ -71,5 +73,13 @@ public abstract class ComponentBase {
 
     public int getUuid() {
         return uuid;
+    }
+
+    public LinearLayout getPrettyView() {
+        return prettyView;
+    }
+
+    public void setPrettyView(LinearLayout prettyView) {
+        this.prettyView = prettyView;
     }
 }

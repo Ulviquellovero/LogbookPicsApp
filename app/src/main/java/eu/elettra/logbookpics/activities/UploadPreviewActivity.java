@@ -7,10 +7,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import eu.elettra.logbookpics.MainActivity;
 import eu.elettra.logbookpics.R;
+import eu.elettra.logbookpics.component_system.ComponentComposer;
 import eu.elettra.logbookpics.singleton.QrCodeInfo;
 
 public class UploadPreviewActivity extends AppCompatActivity {
@@ -25,6 +27,11 @@ public class UploadPreviewActivity extends AppCompatActivity {
 
         ((TextView) findViewById(R.id.title_header)).setText("Title: "+QrCodeInfo.postJSON.optString("title"));
         ((TextView) findViewById(R.id.info_header)).setText("Info: "+QrCodeInfo.postJSON.optString("info"));
+
+        // setting components
+        ComponentComposer.addPrettyViews(UploadPreviewActivity.this);
+        ComponentComposer.addPrettyViewsToExsitingLinearLayout((LinearLayout) findViewById(R.id.comp_container), UploadPreviewActivity.this);
+
 
         ((Button) findViewById(R.id.proceed_btn)).setOnClickListener(new View.OnClickListener() {
             @Override

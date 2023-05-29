@@ -219,8 +219,22 @@ public class ComponentComposer {
         }
     }
 
-    public static void addPrettyViewsToComponents(Context ctx){
+    // Static (at least temporarily
+    public static void addPrettyViews(Context ctx){
+        for (ComponentBase c : list)
+            c.componentToPrettyView(ctx);
+    }
 
+    public static void addPrettyViewsToExsitingLinearLayout(LinearLayout view, Context ctx){
+        for (ComponentBase e : list){
+            if(e == null || ctx==null) continue;
+            if(e.getPrettyView() == null){
+                addPrettyViews(ctx);
+
+            }
+            Log.d("LogBookDebug", e.toString());
+            view.addView(e.getPrettyView());
+        }
     }
 
     // Get & Set

@@ -78,7 +78,7 @@ public class ComponentsActivity extends Activity {
                     }
                     case 3:{
                         Log.d("LogBookDebug", "Bulleted List");
-                        type="list";
+                        type="bullettedlist";
                         break;
                     }
                     case 4:{
