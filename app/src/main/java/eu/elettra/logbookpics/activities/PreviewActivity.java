@@ -43,14 +43,15 @@ public class PreviewActivity extends Activity {
                 testComponents.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        startActivity(new Intent(PreviewActivity.this, ComponentsActivity.class));
+                        //startActivity(new Intent(PreviewActivity.this, ComponentsActivity.class));
+                        startActivity(new Intent(PreviewActivity.this, ImageEditingActivity.class));
                     }
                 });
             }
 
             @Override
             public void onCallbackFailed() {
-
+                // TODO: print an error on the view
             }
         });
 

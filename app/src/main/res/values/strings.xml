@@ -7,6 +7,17 @@
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
+    <!-- Image edit -->
+    <string name="ok">OK</string>
+    <string name="zoom" />
+    <string name="pencil" />
+    <string name="eraser" />
+    <string name="textIns" />
+    <string name="undo" />
+    <string name="redo" />
+    <string name="delete" />
+
+
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
         volutpat, dolor id interdum ullamcorper, risus dolor egestas lectus, sit amet mattis purus
