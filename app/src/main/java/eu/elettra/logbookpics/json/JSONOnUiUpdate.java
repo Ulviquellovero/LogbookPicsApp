@@ -1,5 +1,6 @@
 package eu.elettra.logbookpics.json;
 
+import android.graphics.Bitmap;
 import android.util.Log;
 
 import org.json.JSONException;
@@ -92,4 +93,5 @@ public class JSONOnUiUpdate {
     public void setList(ArrayList<ComponentBase> list) {
         this.list = list;
     }
+
 }

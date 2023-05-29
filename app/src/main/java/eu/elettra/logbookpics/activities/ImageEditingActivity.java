@@ -2,6 +2,7 @@ package eu.elettra.logbookpics.activities;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -16,6 +17,8 @@ import androidx.core.content.res.ResourcesCompat;
 import com.otaliastudios.zoom.ZoomLayout;
 
 import eu.elettra.logbookpics.R;
+import eu.elettra.logbookpics.image.ImageRenderer;
+import eu.elettra.logbookpics.singleton.QrCodeInfo;
 import ja.burhanrashid52.photoeditor.OnPhotoEditorListener;
 import ja.burhanrashid52.photoeditor.OnSaveBitmap;
 import ja.burhanrashid52.photoeditor.PhotoEditor;
@@ -80,8 +83,8 @@ public class ImageEditingActivity extends Activity
     {
         PhotoEditorView mPhotoEditorView = findViewById(R.id.photoEditorView);
 
-        // TODO: edit this
-        mPhotoEditorView.getSource().setImageResource(R.drawable.img_test_icon);
+        //mPhotoEditorView.getSource().setImageResource(R.drawable.img_test_icon);
+        mPhotoEditorView.getSource().setImageBitmap(QrCodeInfo.imageBitmap);
         Typeface mTextRobotoTf = ResourcesCompat.getFont(this, R.font.roboto_medium);
         mPhotoEditor = new PhotoEditor.Builder(this, mPhotoEditorView)
                                                   .setPinchTextScalable(true)
@@ -207,7 +210,14 @@ public class ImageEditingActivity extends Activity
             @Override
             public void onBitmapReady(@Nullable Bitmap bitmap)
             {
-                //"bitmap" è l'immagine modificata"
+                // NOTE: "bitmap" è l'immagine modificata"
+                QrCodeInfo.imageBitmap = bitmap;
+
+                // upload image to post json
+                ImageRenderer.uploadImageToJson();
+
+                // switch to next scene
+                startActivity(new Intent(ImageEditingActivity.this, ComponentsActivity.class));
             }
             @Override
             public void onFailure(@Nullable Exception e) {}
@@ -233,4 +243,6 @@ public class ImageEditingActivity extends Activity
         AlertDialog dialog = builder.create();
         dialog.show();
     }
+
+
 }

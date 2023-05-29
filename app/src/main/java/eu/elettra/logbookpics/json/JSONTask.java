@@ -72,6 +72,9 @@ public class JSONTask
                 (Response.Listener<JSONObject>) response -> {
                     root = response;
 
+                    // TODO: this is still a test, look here if QrCodeInfo.postJSON has any problems
+                    QrCodeInfo.postJSON = response;
+
                     // initiate callback
                     callback.onCallbackSuccessful();
                 },

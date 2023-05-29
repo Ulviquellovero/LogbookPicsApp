@@ -7,8 +7,10 @@ import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.widget.ImageView;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
 import java.util.Base64;
 
 import eu.elettra.logbookpics.json.JSONTask;
@@ -70,6 +72,7 @@ public class ImageRenderer {
 
             Bitmap imgSrc = BitmapFactory.decodeByteArray(decode, 0, decode.length);
 
+            QrCodeInfo.imageBitmap = imgSrc;
             this.activity.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
@@ -81,6 +84,27 @@ public class ImageRenderer {
         }
 
         jsonCallback.onCallbackSuccessful();
+    }
+
+    public static void uploadImageToJson(){
+        Bitmap.CompressFormat format = Bitmap.CompressFormat.JPEG;
+
+        int quality = 100;
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+
+        QrCodeInfo.imageBitmap.compress(format, quality, outputStream);
+
+        byte[] byteArray = outputStream.toByteArray();
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            String encodedBitmap = Base64.getEncoder().encodeToString(byteArray);
+
+            try {
+                QrCodeInfo.postJSON.put("inputimage", encodedBitmap);
+            } catch (JSONException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 
 }
