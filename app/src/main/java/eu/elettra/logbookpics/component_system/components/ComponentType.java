@@ -5,5 +5,6 @@ public enum ComponentType {
     DROPDOWN,
     CHECKBOX,
     BULLETTEDLIST,
+    RADIO,
     UNKNOWN
 }

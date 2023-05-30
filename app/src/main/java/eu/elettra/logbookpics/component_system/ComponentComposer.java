@@ -21,6 +21,7 @@ import eu.elettra.logbookpics.component_system.components.BullettedList;
 import eu.elettra.logbookpics.component_system.components.CheckBox;
 import eu.elettra.logbookpics.component_system.components.ComponentBase;
 import eu.elettra.logbookpics.component_system.components.ComponentType;
+import eu.elettra.logbookpics.component_system.components.Radio;
 import eu.elettra.logbookpics.component_system.components.TextLabel;
 import eu.elettra.logbookpics.json.JSONOnUiUpdate;
 import eu.elettra.logbookpics.singleton.QrCodeInfo;
@@ -47,6 +48,7 @@ public class ComponentComposer {
         compSelector.put("dropdown", ComponentType.DROPDOWN);
         compSelector.put("bullettedlist", ComponentType.BULLETTEDLIST);
         compSelector.put("checkbox", ComponentType.CHECKBOX);
+        compSelector.put("radio", ComponentType.RADIO);
         compSelector.put("", ComponentType.UNKNOWN);
 
         specialComponentsListeners(act);
@@ -157,6 +159,8 @@ public class ComponentComposer {
                 return new CheckBox();
             case BULLETTEDLIST:
                 return new BullettedList();
+            case RADIO:
+                return new Radio();
             default:
                 break;
         }
