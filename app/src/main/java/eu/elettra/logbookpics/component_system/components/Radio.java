@@ -105,10 +105,13 @@ public class Radio extends ComponentBase{
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 // disable all buttons
-                LinearLayout parent = (LinearLayout) rButton.getParent();
+                LinearLayout parent = (LinearLayout) compoundButton.getParent();
                 for(int i=0;i<parent.getChildCount();i++){
-                    if(parent.getChildAt(i) instanceof RadioButton)
+                    if(parent.getChildAt(i) instanceof RadioButton) {
+                        // TODO: Remove this
+                        Log.d("LogBookDebug", parent.getChildAt(i).toString());
                         ((RadioButton) parent.getChildAt(i)).setChecked(false);
+                    }
                 }
 
                 // update (?) maybe
