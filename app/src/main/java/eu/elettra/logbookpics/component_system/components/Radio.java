@@ -82,9 +82,85 @@ public class Radio extends ComponentBase{
 
         // adding three radio buttons
         RadioGroup radioGroup = new RadioGroup(ctx);
-        for(int i=0;i<values.length; i++){
-            radioGroup.addView(addRadioButtonEditable(ctx, values[i],i, (this.on==i), jsonOnUiUpdate));
+
+        //
+        RadioButton rButton;
+        EditText editText;
+
+        for(int idx=0;idx<values.length; idx++){
+            // add radio button
+            rButton = new RadioButton(ctx);
+            rButton.setChecked(idx==on);
+            rButton.setId(idx);
+
+            // rButton listener
+            int finalI = idx;
+            rButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                    // update (?) maybe
+                    on = (b==true)? finalI : on;
+
+                    //compoundButton.setChecked(true);
+
+                    try {
+                        jsonOnUiUpdate.componentUpdate();
+                    } catch (JSONException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            });
+
+
+            // add edittext
+            editText = new EditText(ctx);
+            editText.setText(values[idx]);
+
+            // on edit text do
+            editText.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+
+                @Override
+                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                    // TODO (?)
+                    values[finalI] = charSequence.toString();
+
+                    // write to json
+                    try {
+                        jsonOnUiUpdate.componentUpdate();
+                    } catch (JSONException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+
+                @Override
+                public void afterTextChanged(Editable editable) {}
+            });
+
+            radioGroup.addView(rButton);
+            radioGroup.addView(editText);
+
+            //radioGroup.addView(addRadioButtonEditable(ctx, values[idx],idx, (this.on==idx), jsonOnUiUpdate));
         }
+
+        // radioGroup listener
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                for (int i = 0; i < group.getChildCount(); i++) {
+                    if(!(group.getChildAt(i) instanceof RadioButton)) continue;
+
+                    RadioButton radioButton = (RadioButton) group.getChildAt(i);
+
+
+                    if (radioButton.getId() != checkedId) {
+                        radioButton.setChecked(false);
+                    }
+                }
+            }
+        });
+
 
         super.editView.addView(radioGroup);
         super.editView.addView(addMoveUpDownButton(ctx));
