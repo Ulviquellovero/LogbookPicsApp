@@ -1,4 +1,6 @@
 # LogBookPics
+[![Documentation Status](https://readthedocs.org/projects/logbookpics-docs/badge/?version=latest)](https://logbookpics-docs.readthedocs.io/en/latest/?badge=latest)
+
 an easy yet advanced way to insert photos from a smartphone to a logbook
 
 ## What does it do?
