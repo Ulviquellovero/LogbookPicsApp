@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".activities.AboutActivity"
     android:layout_gravity="center"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="10dp">
 
     <TextView
         android:layout_width="match_parent"
@@ -18,6 +19,38 @@
         android:layout_height="wrap_content"
         android:textSize="22dp"
         android:text="an easy yet advanced way to insert photos from a smartphone to a logbook"></TextView>
+
+    <!-- Links -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal"
+        android:padding="20dp">
+
+        <ImageButton
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:scaleType="fitXY"
+            android:padding="5dp"
+            android:id="@+id/git"
+            android:src="@drawable/gitlogo"
+            android:background="@android:color/transparent">
+
+        </ImageButton>
+        <ImageButton
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:scaleType="fitXY"
+            android:padding="5dp"
+            android:id="@+id/docs"
+            android:src="@drawable/readthedocslogo"
+            android:background="@android:color/transparent">
+
+        </ImageButton>
+    </LinearLayout>
+
+
 
 
 

@@ -31,6 +31,7 @@ public class PostActivity extends Activity {
                     @Override
                     public void onCallbackSuccessful() {
                         Toast.makeText(PostActivity.this, "Your changes are saved", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(PostActivity.this, AboutActivity.class));
                     }
 
                     @Override
