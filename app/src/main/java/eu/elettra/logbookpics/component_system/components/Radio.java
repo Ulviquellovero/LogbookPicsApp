@@ -1,6 +1,10 @@
 package eu.elettra.logbookpics.component_system.components;
 
 import android.content.Context;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
+import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -46,12 +50,17 @@ public class Radio extends ComponentBase{
 
         JSONArray jArr = jObj.optJSONArray("options");
 
+        Log.d("LogBookDebug", String.valueOf(jArr.length()));
+
         for(int i=0; i<jArr.length(); i++){
-            if(values[i]==null) break;
+            // a null pointer exception might happen
 
             try {
-                if(jArr.get(i) == jObj.optString("default")) on = i;
-                values[i]= (String) jObj.optJSONArray("options").get(i);
+                if((String)jArr.get(i) == jObj.optString("default"))
+                    on = i;
+
+                values[i]= (String) jArr.get(i);
+                Log.d("LogBookDebug", values[i]);
             } catch (JSONException e) {
                 throw new RuntimeException(e);
             }
@@ -95,9 +104,17 @@ public class Radio extends ComponentBase{
         rButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                // disable all buttons
+                LinearLayout parent = (LinearLayout) rButton.getParent();
+                for(int i=0;i<parent.getChildCount();i++){
+                    if(parent.getChildAt(i) instanceof RadioButton)
+                        ((RadioButton) parent.getChildAt(i)).setChecked(false);
+                }
 
                 // update (?) maybe
                 on = (b==true)? id : on;
+
+                compoundButton.setChecked(true);
 
                 try {
                     jsonOnUiUpdate.componentUpdate();
@@ -109,8 +126,29 @@ public class Radio extends ComponentBase{
 
 
         EditText et = new EditText(ctx);
+        et.setText(value);
 
         // on edit text do
+        et.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                // TODO (?)
+                values[id] = charSequence.toString();
+
+                // upload to json
+                try {
+                    jsonOnUiUpdate.componentUpdate();
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {}
+        });
 
         radioLayout.setLayoutParams(radioParams);
 

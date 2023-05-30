@@ -115,12 +115,10 @@ public class ComponentComposer {
             String value = jObj.optString("type");
             ComponentBase c = resolveType(value);
 
-            Log.d("LogBookDebug", jObj.optString("type"));
 
             if(c==null) continue;
 
             c.setFields(jObj);
-            //c.componentToView(ctx); // TODO: JSON on ui update should be passed here
             list.add(c);
         }
 
@@ -141,7 +139,7 @@ public class ComponentComposer {
                 addViewsToComponents(ctx);
 
             }
-            Log.d("LogBookDebug", e.toString());
+
             view.addView(e.getEditView());
         }
     }
@@ -174,7 +172,6 @@ public class ComponentComposer {
             if(c.getUuid()==view.getId()){
                 // remove from list
                 iterator.remove();
-                Log.d("LogBookDebug", list.toString());
                 // remove from view
                 removeAllComponentToExistingScrollView(rootView);
                 addComponentsToExistingScrollview(rootView, ctx);
@@ -199,8 +196,6 @@ public class ComponentComposer {
 
                 if(list.indexOf(c)==-1 || list.indexOf(c)+moveDirection==-1) continue;
 
-                Log.d("LogBookDebug", Integer.toString(list.indexOf(c)));
-                Log.d("LogBookDebug", Integer.toString(list.indexOf(c)+moveDirection));
                 try{
                     Collections.swap(list, list.indexOf(c), list.indexOf(c)+moveDirection);
                 } catch (IndexOutOfBoundsException i){

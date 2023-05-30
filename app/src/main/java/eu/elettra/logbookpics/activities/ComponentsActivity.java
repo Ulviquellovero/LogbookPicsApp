@@ -112,7 +112,6 @@ public class ComponentsActivity extends Activity {
             @Override
             public void onClick(View view) {
                 componentComposer.addView(ComponentsActivity.this, type);
-                Log.d("LogBookDebug", componentComposer.getList().toString());
                 componentComposer.removeAllComponentToExistingScrollView(findViewById(R.id.components_view));
                 componentComposer.addComponentsToExistingScrollview(findViewById(R.id.components_view), ComponentsActivity.this);
 
