@@ -1,10 +1,16 @@
 package eu.elettra.logbookpics.activities;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import eu.elettra.logbookpics.R;
 import eu.elettra.logbookpics.image.ImageRenderer;
@@ -21,26 +27,22 @@ public class PreviewActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.image_prev);
         Activity act = this;
+        ViewGroup decorView = (ViewGroup) getWindow().getDecorView();
         imageRenderer = new ImageRenderer(this, PreviewActivity.this, QrCodeInfo.url, R.id.img, new JSONTask.JSONCallback() {
+            @SuppressLint("ResourceType")
             @Override
             public void onCallbackSuccessful() {
 
-                TextView postButton = (TextView)findViewById(R.id.post);
-                TextView testComponents = (TextView)findViewById(R.id.test_components);
+                //TextView testComponents = (TextView)findViewById(R.id.test_components);
+                Button proceed = new Button(PreviewActivity.this);
+                proceed.setText("Proceed");
 
-                postButton.setEnabled(true);
-                testComponents.setEnabled(true);
+                proceed.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                proceed.setEnabled(true);
 
-                postButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        // do post
-                        postHandler = new PostHandler(act,PreviewActivity.this, QrCodeInfo.uploadUrl);
-                        view.setEnabled(false);
-                    }
-                });
+                ((LinearLayout) findViewById(R.id.image_prev)).addView(proceed);
 
-                testComponents.setOnClickListener(new View.OnClickListener() {
+                proceed.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         //startActivity(new Intent(PreviewActivity.this, ComponentsActivity.class));
@@ -51,7 +53,12 @@ public class PreviewActivity extends Activity {
 
             @Override
             public void onCallbackFailed() {
-                // TODO: print an error on the view
+                TextView textView = new TextView(PreviewActivity.this);
+                textView.setText("an error has occured while parsing the provided QR Code");
+                textView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                textView.setEnabled(true);
+
+                ((LinearLayout) findViewById(R.id.image_prev)).addView(textView);
             }
         });
 
