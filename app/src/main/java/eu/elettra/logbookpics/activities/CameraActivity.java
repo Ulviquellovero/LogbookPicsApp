@@ -58,6 +58,7 @@ import java.util.concurrent.Executors;
 import eu.elettra.logbookpics.MainActivity;
 import eu.elettra.logbookpics.R;
 import eu.elettra.logbookpics.singleton.QrCodeInfo;
+import eu.elettra.logbookpics.utils.ImageUtils;
 
 public class CameraActivity extends AppCompatActivity {
     private Executor executor = Executors.newSingleThreadExecutor();
@@ -141,13 +142,16 @@ public class CameraActivity extends AppCompatActivity {
                     @SuppressLint("UnsafeOptInUsageError")
                     @Override
                     public void onCaptureSuccess(@NonNull ImageProxy image) {
-                        // todo: resize the image
-
                         // set image as bitmap
                         ByteBuffer buffer = image.getPlanes()[0].getBuffer();
                         byte[] bytes = new byte[buffer.capacity()];
                         buffer.get(bytes);
-                        QrCodeInfo.imageBitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length, null);
+                        Bitmap bitmapBuffer = BitmapFactory.decodeByteArray(bytes, 0, bytes.length, null);
+                        // resize bitmap buffer
+                        bitmapBuffer = ImageUtils.getResizedBitmap(bitmapBuffer, 1280);
+
+                        //QrCodeInfo.imageBitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length, null);
+                        QrCodeInfo.imageBitmap = bitmapBuffer;
 
                         //QrCodeInfo.imageBitmap = toBitmap(image.getImage());
                         startActivity(new Intent(CameraActivity.this, PreviewActivity.class));

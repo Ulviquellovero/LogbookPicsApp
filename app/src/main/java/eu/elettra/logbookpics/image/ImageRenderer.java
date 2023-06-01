@@ -64,7 +64,7 @@ public class ImageRenderer {
 
 
         image = QrCodeInfo.jsonTask.getRootJSON().optString("inputimage");
-
+        QrCodeInfo.uploadUrl = QrCodeInfo.jsonTask.getRootJSON().optString("uploadJSONdestination");
         // special cases
         if(image.equals("camera")){
             if(QrCodeInfo.imageBitmap==null)
@@ -75,7 +75,7 @@ public class ImageRenderer {
             return;
         }
 
-        QrCodeInfo.uploadUrl = QrCodeInfo.jsonTask.getRootJSON().optString("uploadJSONdestination");
+
 
         Log.d("LogBookDebug",QrCodeInfo.uploadUrl);
 

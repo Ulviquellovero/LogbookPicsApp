@@ -2,6 +2,7 @@ package eu.elettra.logbookpics.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -15,7 +16,7 @@ import eu.elettra.logbookpics.R;
 import eu.elettra.logbookpics.component_system.ComponentComposer;
 import eu.elettra.logbookpics.singleton.QrCodeInfo;
 
-public class UploadPreviewActivity extends AppCompatActivity {
+public class UploadPreviewActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
