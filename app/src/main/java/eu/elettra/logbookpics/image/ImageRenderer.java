@@ -2,6 +2,7 @@ package eu.elettra.logbookpics.image;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
@@ -13,6 +14,7 @@ import org.json.JSONObject;
 import java.io.ByteArrayOutputStream;
 import java.util.Base64;
 
+import eu.elettra.logbookpics.activities.CameraActivity;
 import eu.elettra.logbookpics.json.JSONTask;
 import eu.elettra.logbookpics.singleton.QrCodeInfo;
 
@@ -23,10 +25,12 @@ public class ImageRenderer {
     private String postUrl;
     private ImageView imageRef;
     private Activity activity;
+    private Context ctx;
 
     public ImageRenderer(Activity activity, Context ctx, String url, int id, JSONTask.JSONCallback jsonCallback) {
         imageRef = (ImageView) activity.findViewById(id);
         this.activity=activity;
+        this.ctx=ctx;
 
         if(QrCodeInfo.jsonTask==null)
             QrCodeInfo.jsonTask = new JSONTask(ctx);
@@ -58,8 +62,19 @@ public class ImageRenderer {
 
         QrCodeInfo.root = QrCodeInfo.jsonTask.getRootJSON();
 
-        if(QrCodeInfo.root!= null)  Log.d("ImageRenderer", "if it aint null here");
+
         image = QrCodeInfo.jsonTask.getRootJSON().optString("inputimage");
+
+        // special cases
+        if(image.equals("camera")){
+            if(QrCodeInfo.imageBitmap==null)
+                activity.startActivity(new Intent(activity, CameraActivity.class));
+            jsonCallback.onCallbackSuccessful();
+            return;
+        } else if (image.equals("file")) {
+            return;
+        }
+
         QrCodeInfo.uploadUrl = QrCodeInfo.jsonTask.getRootJSON().optString("uploadJSONdestination");
 
         Log.d("LogBookDebug",QrCodeInfo.uploadUrl);
