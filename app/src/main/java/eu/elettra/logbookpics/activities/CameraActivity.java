@@ -148,7 +148,8 @@ public class CameraActivity extends AppCompatActivity {
                         buffer.get(bytes);
                         Bitmap bitmapBuffer = BitmapFactory.decodeByteArray(bytes, 0, bytes.length, null);
                         // resize bitmap buffer
-                        bitmapBuffer = ImageUtils.getResizedBitmap(bitmapBuffer, 1280);
+                        // TODO: 1280 seems to be too big
+                        bitmapBuffer = ImageUtils.getResizedBitmap(bitmapBuffer, 1000);
 
                         //QrCodeInfo.imageBitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length, null);
                         QrCodeInfo.imageBitmap = bitmapBuffer;
