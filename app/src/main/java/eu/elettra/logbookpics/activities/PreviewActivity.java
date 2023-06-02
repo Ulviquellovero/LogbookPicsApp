@@ -32,7 +32,6 @@ public class PreviewActivity extends Activity {
         Activity act = this;
         ViewGroup decorView = (ViewGroup) getWindow().getDecorView();
         imageRenderer = new ImageRenderer(this, PreviewActivity.this, QrCodeInfo.url, R.id.img, new JSONTask.JSONCallback() {
-            @SuppressLint("ResourceType")
             @Override
             public void onCallbackSuccessful() {
 
