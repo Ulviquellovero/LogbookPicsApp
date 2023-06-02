@@ -64,16 +64,6 @@ public class ImageRenderer {
 
         image = QrCodeInfo.jsonTask.getRootJSON().optString("inputimage");
 
-        // special cases
-        if(image.equals("camera")){
-            if(QrCodeInfo.imageBitmap==null)
-                activity.startActivity(new Intent(activity, CameraActivity.class));
-            jsonCallback.onCallbackSuccessful();
-            return;
-        } else if (image.equals("file")) {
-            return;
-        }
-
         QrCodeInfo.uploadUrl = QrCodeInfo.jsonTask.getRootJSON().optString("uploadJSONdestination");
 
         Log.d("LogBookDebug",QrCodeInfo.uploadUrl);

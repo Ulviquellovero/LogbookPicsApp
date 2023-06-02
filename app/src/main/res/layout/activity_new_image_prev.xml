@@ -67,7 +67,7 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/test_img" />
+                android:id="@+id/imagePreview" />
 
         </LinearLayout>
 
@@ -140,7 +140,7 @@
         android:layout_height="0dp"
         android:layout_margin="15dp"
         android:gravity="center_horizontal|center"
-        android:text="@string/previous"
+        android:text="Scan another"
         android:textColor="@color/white"
         android:textStyle="bold"
         app:autoSizeMaxTextSize="100sp"
