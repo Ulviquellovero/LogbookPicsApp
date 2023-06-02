@@ -7,11 +7,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import eu.elettra.logbookpics.MainActivity;
 import eu.elettra.logbookpics.R;
 import eu.elettra.logbookpics.image.ImageRenderer;
 import eu.elettra.logbookpics.image.PostHandler;
@@ -32,22 +35,30 @@ public class PreviewActivity extends Activity {
             @Override
             public void onCallbackSuccessful() {
 
-                //TextView testComponents = (TextView)findViewById(R.id.test_components);
-                Button proceed = new Button(PreviewActivity.this);
-                proceed.setText("Proceed");
+                // startActivity(new Intent(PreviewActivity.this, ImageEditingActivity.class));
 
-                proceed.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-                proceed.setEnabled(true);
+                setContentView(R.layout.activity_new_image_prev);
 
-                ((LinearLayout) findViewById(R.id.image_prev)).addView(proceed);
 
-                proceed.setOnClickListener(new View.OnClickListener() {
+                ((ImageView) findViewById(R.id.imagePreview)).setImageBitmap(QrCodeInfo.imageBitmap);
+
+                // listeners
+                // next
+                ((ImageButton) findViewById(R.id.imageButton2)).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        //startActivity(new Intent(PreviewActivity.this, ComponentsActivity.class));
                         startActivity(new Intent(PreviewActivity.this, ImageEditingActivity.class));
                     }
                 });
+
+                // scan new
+                ((ImageButton) findViewById(R.id.button)).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        startActivity(new Intent(PreviewActivity.this, MainActivity.class));
+                    }
+                });
+
             }
 
             @Override

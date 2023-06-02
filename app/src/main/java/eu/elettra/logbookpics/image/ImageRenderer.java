@@ -70,6 +70,7 @@ public class ImageRenderer {
 
 
         image = QrCodeInfo.jsonTask.getRootJSON().optString("inputimage");
+
         QrCodeInfo.uploadUrl = QrCodeInfo.jsonTask.getRootJSON().optString("uploadJSONdestination");
         // special cases
         if(image.equals("camera")){

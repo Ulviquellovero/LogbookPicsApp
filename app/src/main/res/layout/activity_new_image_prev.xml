@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#2252CD"
+    tools:context=".MainActivity">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/top_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.15" />
+
+    <View
+        android:id="@+id/smartphone_frame"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="-20dp"
+        android:background="@drawable/cut_rectangle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/top_guideline" />
+
+    <com.otaliastudios.zoom.ZoomLayout
+        android:id="@+id/zoom_layout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="30dp"
+        android:scrollbars="vertical|horizontal"
+        app:alignment="center"
+        app:animationDuration="280"
+        app:flingEnabled="true"
+        app:hasClickableChildren="true"
+        app:horizontalPanEnabled="true"
+        app:layout_constraintBottom_toTopOf="@+id/top_bottoms_guideline"
+        app:layout_constraintEnd_toEndOf="@+id/smartphone_frame"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/smartphone_frame"
+        app:layout_constraintTop_toTopOf="@+id/top_guideline"
+        app:maxZoom="2.5"
+        app:maxZoomType="zoom"
+        app:minZoom="0.7"
+        app:minZoomType="zoom"
+        app:oneFingerScrollEnabled="true"
+        app:overPinchable="true"
+        app:overScrollHorizontal="true"
+        app:overScrollVertical="true"
+        app:scrollEnabled="true"
+        app:threeFingersScrollEnabled="true"
+        app:transformation="centerInside"
+        app:transformationGravity="auto"
+        app:twoFingersScrollEnabled="true"
+        app:verticalPanEnabled="true"
+        app:zoomEnabled="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/imagePreview" />
+
+        </LinearLayout>
+
+    </com.otaliastudios.zoom.ZoomLayout>
+
+    <View
+        android:id="@+id/camera_frame"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/camera_frame"
+        app:layout_constraintBottom_toTopOf="@+id/camera_bottom_guideline"
+        app:layout_constraintEnd_toStartOf="@+id/camera_end_guideline"
+        app:layout_constraintStart_toStartOf="@+id/camera_start_guideline"
+        app:layout_constraintTop_toTopOf="@+id/top_guideline" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/camera_start_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.35" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/camera_end_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.65" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/camera_bottom_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.2" />
+
+    <View
+        android:id="@+id/camera"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/camera"
+        app:layout_constraintBottom_toBottomOf="@+id/camera_frame"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="@+id/camera_frame"
+        app:layout_constraintStart_toStartOf="@+id/camera_frame"
+        app:layout_constraintTop_toTopOf="@+id/camera_frame" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/top_bottoms_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.9" />
+
+    <ImageButton
+        android:id="@+id/button"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/transparent"
+        android:src="@drawable/rounded_button"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_bottoms_guideline"
+        app:layout_constraintEnd_toStartOf="@+id/camera_start_guideline"
+        app:layout_constraintStart_toStartOf="@+id/zoom_layout"
+        app:layout_constraintTop_toTopOf="@+id/top_bottoms_guideline"
+        android:scaleType="fitCenter"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="15dp"
+        android:gravity="center_horizontal|center"
+        android:text="Scan another"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:autoSizeMaxTextSize="100sp"
+        app:autoSizeMinTextSize="10sp"
+        app:autoSizeStepGranularity="1sp"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintBottom_toBottomOf="@+id/button"
+        app:layout_constraintEnd_toStartOf="@+id/camera_start_guideline"
+        app:layout_constraintStart_toStartOf="@+id/button"
+        app:layout_constraintTop_toTopOf="@+id/top_bottoms_guideline" />
+
+    <ImageButton
+        android:id="@+id/imageButton2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/transparent"
+        android:scaleType="fitCenter"
+        android:src="@drawable/rounded_button"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_bottoms_guideline"
+        app:layout_constraintEnd_toEndOf="@+id/zoom_layout"
+        app:layout_constraintStart_toStartOf="@+id/camera_end_guideline"
+        app:layout_constraintTop_toTopOf="@+id/top_bottoms_guideline" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="15dp"
+        android:gravity="center_horizontal|center"
+        android:text="@string/next"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:autoSizeMaxTextSize="100sp"
+        app:autoSizeMinTextSize="10sp"
+        app:autoSizeStepGranularity="1sp"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintBottom_toBottomOf="@+id/imageButton2"
+        app:layout_constraintEnd_toEndOf="@+id/imageButton2"
+        app:layout_constraintStart_toStartOf="@+id/camera_end_guideline"
+        app:layout_constraintTop_toTopOf="@+id/top_bottoms_guideline" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/bottom_bottoms_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.98" />
+
+    <TextView
+        android:id="@+id/header_text"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="15dp"
+        android:text="@string/image_preview"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:autoSizeMaxTextSize="100sp"
+        app:autoSizeMinTextSize="12sp"
+        app:autoSizeStepGranularity="2sp"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintBottom_toTopOf="@+id/top_guideline"
+        app:layout_constraintEnd_toStartOf="@+id/header_end_guideline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/header_end_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.9" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
