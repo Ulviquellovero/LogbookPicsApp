@@ -11,7 +11,7 @@
         android:layout_height="match_parent" />
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/captureImg"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_alignParentBottom="true"
