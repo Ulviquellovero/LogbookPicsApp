@@ -55,10 +55,14 @@
         libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
+    <string name="lorem_ipsum2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris augue neque, sagittis at mi nec, dapibus tristique metus. In interdum fringilla justo nec pharetra. Cras non ligula lectus. Phasellus eu suscipit urna. Sed ultricies imperdiet turpis vel venenatis. Aliquam molestie, velit iaculis fermentum venenatis, dui augue mattis metus, eget consequat nunc lorem vel metus. Sed ut magna commodo, bibendum nisl eget, ornare felis. Pellentesque turpis enim, consectetur quis metus nec, pellentesque efficitur dolor. Sed tincidunt faucibus commodo. Nullam tellus nunc, gravida ut iaculis at, consequat sed magna. In suscipit sit amet felis ac tempor.</string>
     <string name="image_preview">Image Preview</string>
     <string name="image_editor">Image Editor</string>
     <string name="confirmation_frame">Confirmation Frame</string>
     <string name="save_changes">Save changes?</string>
     <string name="save">SAVE</string>
     <string name="go_back">GO BACK</string>
+    <string name="proceed">PROCEED</string>
+    <string name="upload_preview">Upload Preview</string>
+    <string name="montagna">Montagna</string>
 </resources>
