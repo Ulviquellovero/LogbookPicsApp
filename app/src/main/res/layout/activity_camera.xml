@@ -18,5 +18,5 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="16dp"
         android:scaleType="fitXY"
-        android:src="@drawable/gitlogo" />
+        android:src="@drawable/baseline_camera_24" />
 </RelativeLayout>

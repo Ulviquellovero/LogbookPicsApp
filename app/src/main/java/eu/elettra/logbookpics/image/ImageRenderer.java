@@ -5,6 +5,7 @@ import static androidx.activity.result.ActivityResultCallerKt.registerForActivit
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -12,6 +13,14 @@ import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.widget.ImageView;
+import android.widget.Toast;
+
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -21,9 +30,11 @@ import java.io.IOException;
 import java.util.Base64;
 
 import eu.elettra.logbookpics.activities.CameraActivity;
+import eu.elettra.logbookpics.activities.PreviewActivity;
 import eu.elettra.logbookpics.json.JSONTask;
 import eu.elettra.logbookpics.singleton.QrCodeInfo;
 import eu.elettra.logbookpics.utils.ImageUtils;
+import kotlin.Unit;
 
 public class ImageRenderer {
 
@@ -32,12 +43,15 @@ public class ImageRenderer {
     private String postUrl;
     private ImageView imageRef;
     private Activity activity;
+    private ActivityResultLauncher<Intent> galleryActivityResultLauncher;
     private Context ctx;
 
     public ImageRenderer(Activity activity, Context ctx, String url, int id, JSONTask.JSONCallback jsonCallback) {
         imageRef = (ImageView) activity.findViewById(id);
         this.activity=activity;
         this.ctx=ctx;
+        
+        setupActivityResultLauncher();
 
         if(QrCodeInfo.jsonTask==null)
             QrCodeInfo.jsonTask = new JSONTask(ctx);
@@ -83,7 +97,7 @@ public class ImageRenderer {
         } else if (image.equals("file")) {
 
             // TODO: make this work somehow
-            //new GalleryImage().imageChooser();
+            launchGalleryActivity();
 
             // small control here
             if(QrCodeInfo.imageBitmap!=null) jsonCallback.onCallbackSuccessful(); else jsonCallback.onCallbackFailed();
@@ -136,50 +150,27 @@ public class ImageRenderer {
     }
 
 
-    private class GalleryImage extends Activity {
-        // this function is triggered when
-        // the Select Image Button is clicked
-        private final int SELECT_PICTURE = 200;
-        void imageChooser() {
-
-            // create an instance of the
-            // intent of the type image
-            Intent i = new Intent();
-            i.setType("image/*");
-            i.setAction(Intent.ACTION_GET_CONTENT);
-
-            // pass the constant to compare it
-            // with the returned requestCode
-            startActivityForResult(Intent.createChooser(i, "Select Picture"), SELECT_PICTURE);
-        }
-
-
-        @Override
-        public void onActivityResult(int requestCode, int resultCode, Intent data) {
-            onActivityResult(requestCode, resultCode, data);
-
-            if (resultCode == RESULT_OK) {
-
-                // compare the resultCode with the
-                // SELECT_PICTURE constant
-                if (requestCode == SELECT_PICTURE) {
-                    // TODO: set image bitmap from here
-                    // Get the url of the image from data
-                    Uri imageUri = data.getData();
-                    Bitmap bitmap;
-                    try {
-                        bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri);
-
-                        // TODO: 1000 is temporary
-                        QrCodeInfo.imageBitmap = ImageUtils.getResizedBitmap(bitmap, 1000);
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
+    private void setupActivityResultLauncher() {
+        // this does not work for some reasons that only god knows
+        galleryActivityResultLauncher =  activity.registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                new ActivityResultCallback<ActivityResult>() {
+                    @Override
+                    public void onActivityResult(ActivityResult result) {
+                        // Gestisci il risultato qui
+                        int resultCode = result.getResultCode();
+                        Intent data = result.getData();
+                        // Esegui le operazioni necessarie in base al risultato
                     }
-
-                }
-            }
-        }
+                });
     }
+
+    private void launchGalleryActivity() {
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        galleryActivityResultLauncher.launch(intent);
+    }
+
+
 
 }
 
