@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">LogBookPics</string>
+    <string name="git_url">https://github.com/Ulviquellovero/LogbookPicsApp</string>
+    <string name="readthedocs_url">https://logbookpics-docs.readthedocs.io/en/latest/index.html</string>
     <string name="title_activity_components_test">ComponentsTestActivity</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
