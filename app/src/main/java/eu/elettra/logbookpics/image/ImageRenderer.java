@@ -1,6 +1,6 @@
 package eu.elettra.logbookpics.image;
 
-import static android.app.Activity.RESULT_OK;
+import static androidx.activity.result.ActivityResultCallerKt.registerForActivityResult;
 
 import android.app.Activity;
 import android.content.Context;
@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.widget.ImageView;
@@ -76,11 +77,16 @@ public class ImageRenderer {
         if(image.equals("camera")){
             if(QrCodeInfo.imageBitmap==null)
                 activity.startActivity(new Intent(activity, CameraActivity.class));
-            jsonCallback.onCallbackSuccessful();
+            // small control here
+            if(QrCodeInfo.imageBitmap!=null) jsonCallback.onCallbackSuccessful(); else jsonCallback.onCallbackFailed();
             return;
         } else if (image.equals("file")) {
-            imageChooser();
-            jsonCallback.onCallbackSuccessful();
+
+            // TODO: make this work somehow
+            //new GalleryImage().imageChooser();
+
+            // small control here
+            if(QrCodeInfo.imageBitmap!=null) jsonCallback.onCallbackSuccessful(); else jsonCallback.onCallbackFailed();
             return;
         }
 
@@ -130,47 +136,50 @@ public class ImageRenderer {
     }
 
 
-    // this function is triggered when
-    // the Select Image Button is clicked
-    private final int SELECT_PICTURE = 200;
-    void imageChooser() {
+    private class GalleryImage extends Activity {
+        // this function is triggered when
+        // the Select Image Button is clicked
+        private final int SELECT_PICTURE = 200;
+        void imageChooser() {
 
-        // create an instance of the
-        // intent of the type image
-        Intent i = new Intent();
-        i.setType("image/*");
-        i.setAction(Intent.ACTION_GET_CONTENT);
+            // create an instance of the
+            // intent of the type image
+            Intent i = new Intent();
+            i.setType("image/*");
+            i.setAction(Intent.ACTION_GET_CONTENT);
 
-        // pass the constant to compare it
-        // with the returned requestCode
-        activity.startActivityForResult(Intent.createChooser(i, "Select Picture"), SELECT_PICTURE);
-    }
+            // pass the constant to compare it
+            // with the returned requestCode
+            startActivityForResult(Intent.createChooser(i, "Select Picture"), SELECT_PICTURE);
+        }
 
-    // this function is triggered when user
-    // selects the image from the imageChooser
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        onActivityResult(requestCode, resultCode, data);
 
-        if (resultCode == RESULT_OK) {
+        @Override
+        public void onActivityResult(int requestCode, int resultCode, Intent data) {
+            onActivityResult(requestCode, resultCode, data);
 
-            // compare the resultCode with the
-            // SELECT_PICTURE constant
-            if (requestCode == SELECT_PICTURE) {
-                // TODO: set image bitmap from here
-                // Get the url of the image from data
-                Uri imageUri = data.getData();
-                Bitmap bitmap;
-                try {
-                    bitmap = MediaStore.Images.Media.getBitmap(activity.getContentResolver(), imageUri);
+            if (resultCode == RESULT_OK) {
 
-                    // TODO: 1000 is temporary
-                    QrCodeInfo.imageBitmap = ImageUtils.getResizedBitmap(bitmap, 1000);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
+                // compare the resultCode with the
+                // SELECT_PICTURE constant
+                if (requestCode == SELECT_PICTURE) {
+                    // TODO: set image bitmap from here
+                    // Get the url of the image from data
+                    Uri imageUri = data.getData();
+                    Bitmap bitmap;
+                    try {
+                        bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri);
+
+                        // TODO: 1000 is temporary
+                        QrCodeInfo.imageBitmap = ImageUtils.getResizedBitmap(bitmap, 1000);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+
                 }
-
             }
         }
     }
+
 }
 

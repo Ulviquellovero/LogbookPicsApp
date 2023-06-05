@@ -35,6 +35,7 @@ public class MainActivity extends Activity
         initVariables();
         initView();
 
+        // sends you to the About page when clicking the Elettra button
         ((ImageButton) findViewById(R.id.about_elettra)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

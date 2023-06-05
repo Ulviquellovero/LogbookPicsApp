@@ -3,7 +3,10 @@ package eu.elettra.logbookpics.activities;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -14,12 +17,15 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.io.IOException;
+
 import eu.elettra.logbookpics.MainActivity;
 import eu.elettra.logbookpics.R;
 import eu.elettra.logbookpics.image.ImageRenderer;
 import eu.elettra.logbookpics.image.PostHandler;
 import eu.elettra.logbookpics.json.JSONTask;
 import eu.elettra.logbookpics.singleton.QrCodeInfo;
+import eu.elettra.logbookpics.utils.ImageUtils;
 
 public class PreviewActivity extends Activity {
 
@@ -73,4 +79,5 @@ public class PreviewActivity extends Activity {
         });
 
     }
+
 }
