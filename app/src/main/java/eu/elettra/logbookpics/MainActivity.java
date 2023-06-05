@@ -1,4 +1,5 @@
 package eu.elettra.logbookpics;
+import eu.elettra.logbookpics.activities.AboutActivity;
 import eu.elettra.logbookpics.activities.PreviewActivity;
 import eu.elettra.logbookpics.singleton.QrCodeInfo;
 
@@ -7,6 +8,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
@@ -31,6 +34,13 @@ public class MainActivity extends Activity
         setContentView(R.layout.activity_main);
         initVariables();
         initView();
+
+        ((ImageButton) findViewById(R.id.about_elettra)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, AboutActivity.class));
+            }
+        });
     }
 
     //---------------------------------------------------------------------------------------------

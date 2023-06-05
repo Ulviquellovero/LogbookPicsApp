@@ -25,6 +25,14 @@
         app:frameSize="0.75"
         app:frameThickness="2dp"
         app:maskColor="#77000000"/>
+
+    <ImageButton
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:scaleType="fitCenter"
+        android:id="@+id/about_elettra"
+        android:src="@drawable/logo_elettra"
+        ></ImageButton>
 </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
