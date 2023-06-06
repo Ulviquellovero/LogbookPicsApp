@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#2252CD">
+    android:background="#2E2E2E">
 
     <com.otaliastudios.zoom.ZoomLayout
         android:id="@+id/zoom_layout"
@@ -380,22 +380,5 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.83" />
-
-    <TextView
-        android:id="@+id/header_text"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_margin="15dp"
-        android:text="@string/image_editor"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        app:autoSizeMaxTextSize="100sp"
-        app:autoSizeMinTextSize="12sp"
-        app:autoSizeStepGranularity="2sp"
-        app:autoSizeTextType="uniform"
-        app:layout_constraintBottom_toTopOf="@+id/top_guideline"
-        app:layout_constraintEnd_toStartOf="@+id/confirm_btn_guideline"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

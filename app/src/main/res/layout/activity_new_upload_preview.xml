@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#2252CD"
+    android:background="#2E2E2E"
     tools:context=".MainActivity">
 
     <androidx.constraintlayout.widget.Guideline
@@ -68,24 +68,6 @@
         </LinearLayout>
 
     </com.otaliastudios.zoom.ZoomLayout>
-
-    <TextView
-        android:id="@+id/header_text"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_margin="15dp"
-        android:text="@string/upload_preview"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        app:autoSizeMaxTextSize="100sp"
-        app:autoSizeMinTextSize="12sp"
-        app:autoSizeStepGranularity="2sp"
-        app:autoSizeTextType="uniform"
-        app:layout_constraintBottom_toTopOf="@+id/top_guideline"
-        app:layout_constraintEnd_toStartOf="@+id/header_end_guideline"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/header_end_guideline"

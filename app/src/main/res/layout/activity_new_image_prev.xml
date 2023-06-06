@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#2252CD"
+    android:background="#2E2E2E"
     tools:context=".MainActivity">
 
     <androidx.constraintlayout.widget.Guideline
@@ -73,16 +73,6 @@
 
     </com.otaliastudios.zoom.ZoomLayout>
 
-    <View
-        android:id="@+id/camera_frame"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@drawable/camera_frame"
-        app:layout_constraintBottom_toTopOf="@+id/camera_bottom_guideline"
-        app:layout_constraintEnd_toStartOf="@+id/camera_end_guideline"
-        app:layout_constraintStart_toStartOf="@+id/camera_start_guideline"
-        app:layout_constraintTop_toTopOf="@+id/top_guideline" />
-
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/camera_start_guideline"
         android:layout_width="wrap_content"
@@ -103,18 +93,6 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.2" />
-
-    <View
-        android:id="@+id/camera"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_margin="10dp"
-        android:background="@drawable/camera"
-        app:layout_constraintBottom_toBottomOf="@+id/camera_frame"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintEnd_toEndOf="@+id/camera_frame"
-        app:layout_constraintStart_toStartOf="@+id/camera_frame"
-        app:layout_constraintTop_toTopOf="@+id/camera_frame" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/top_bottoms_guideline"
@@ -187,23 +165,6 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.98" />
-
-    <TextView
-        android:id="@+id/header_text"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_margin="15dp"
-        android:text="@string/image_preview"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        app:autoSizeMaxTextSize="100sp"
-        app:autoSizeMinTextSize="12sp"
-        app:autoSizeStepGranularity="2sp"
-        app:autoSizeTextType="uniform"
-        app:layout_constraintBottom_toTopOf="@+id/top_guideline"
-        app:layout_constraintEnd_toStartOf="@+id/header_end_guideline"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/header_end_guideline"
