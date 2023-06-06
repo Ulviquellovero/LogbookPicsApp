@@ -125,10 +125,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="10dp"
-                android:text="@string/montagna"
+                android:text="Lorem Ipsum"
+                android:id="@+id/title_title"
                 android:textColor="@color/black"
                 android:textSize="24dp"
                 android:textStyle="bold" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10dp"
+                android:text="Dolor Sit amed"
+                android:id="@+id/info_title"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:textStyle="italic" />
 
             <View
                 android:layout_width="match_parent"
@@ -136,11 +146,18 @@
                 android:layout_marginBottom="10dp"
                 android:background="@color/black" />
 
-            <TextView
-                android:layout_width="wrap_content"
+            <!-- Components should be added here -->
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/lorem_ipsum2"
-                android:textColor="#B3000000" />
+                android:id="@+id/components_container">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/lorem_ipsum2"
+                    android:textColor="#B3000000" />
+            </LinearLayout>
+
 
         </LinearLayout>
 
@@ -163,6 +180,7 @@
         app:layout_constraintTop_toBottomOf="@+id/nested_scroll_view"
         android:text="@string/proceed"
         android:textStyle="bold"
+        android:id="@+id/upload_prev_proceed"
         app:autoSizeMaxTextSize="24sp"
         app:autoSizeMinTextSize="10sp"
         app:autoSizeStepGranularity="2sp"
