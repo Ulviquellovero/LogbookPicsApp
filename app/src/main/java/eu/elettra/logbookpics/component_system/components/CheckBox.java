@@ -1,6 +1,7 @@
 package eu.elettra.logbookpics.component_system.components;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.CompoundButton;
@@ -102,6 +103,7 @@ public class CheckBox extends ComponentBase{
 
         android.widget.CheckBox checkBox = new android.widget.CheckBox(ctx);
         checkBox.setChecked(onOff);
+        checkBox.setTextColor(Color.BLACK);
         checkBox.setText(value);
         checkBox.setClickable(false);
 

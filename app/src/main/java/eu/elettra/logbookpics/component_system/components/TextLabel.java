@@ -1,6 +1,7 @@
 package eu.elettra.logbookpics.component_system.components;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.EditText;
@@ -81,6 +82,7 @@ public class TextLabel extends ComponentBase{
         super.prettyView = new LinearLayout(ctx);
 
         TextView tv = new TextView(ctx);
+        tv.setTextColor(Color.BLACK);
         tv.setText(value);
 
         super.prettyView.addView(tv);

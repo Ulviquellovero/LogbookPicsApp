@@ -1,6 +1,7 @@
 package eu.elettra.logbookpics.component_system.components;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -246,6 +247,7 @@ public class Radio extends ComponentBase{
 
         for(int i=0; i<values.length;i++){
             RadioButton radioButton = new RadioButton(ctx);
+            radioButton.setTextColor(Color.BLACK);
             radioButton.setClickable(false);
             radioButton.setChecked(i==on);
             radioButton.setText(values[i]);

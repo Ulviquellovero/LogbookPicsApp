@@ -21,20 +21,20 @@ public class UploadPreviewActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_upload_preview);
+        setContentView(R.layout.activity_new_upload_preview);
 
         // setting image
-        ((ImageView)findViewById(R.id.imagePrev)).setImageBitmap(QrCodeInfo.imageBitmap);
+        ((ImageView)findViewById(R.id.image_src_prev)).setImageBitmap(QrCodeInfo.imageBitmap);
 
-        ((TextView) findViewById(R.id.title_header)).setText("Title: "+QrCodeInfo.postJSON.optString("title"));
-        ((TextView) findViewById(R.id.info_header)).setText("Info: "+QrCodeInfo.postJSON.optString("info"));
+        ((TextView) findViewById(R.id.title_title)).setText(QrCodeInfo.postJSON.optString("title"));
+        ((TextView) findViewById(R.id.info_title)).setText(QrCodeInfo.postJSON.optString("info"));
 
         // setting components
         ComponentComposer.addPrettyViews(UploadPreviewActivity.this);
-        ComponentComposer.addPrettyViewsToExsitingLinearLayout((LinearLayout) findViewById(R.id.comp_container), UploadPreviewActivity.this);
+        ComponentComposer.addPrettyViewsToExsitingLinearLayout((LinearLayout) findViewById(R.id.components_container), UploadPreviewActivity.this);
 
 
-        ((Button) findViewById(R.id.proceed_btn)).setOnClickListener(new View.OnClickListener() {
+        ((Button) findViewById(R.id.upload_prev_proceed)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(UploadPreviewActivity.this, PostActivity.class));
