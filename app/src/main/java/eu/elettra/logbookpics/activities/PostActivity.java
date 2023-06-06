@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.appcompat.widget.AppCompatButton;
@@ -13,6 +12,8 @@ import eu.elettra.logbookpics.MainActivity;
 import eu.elettra.logbookpics.R;
 import eu.elettra.logbookpics.json.JSONTask;
 import eu.elettra.logbookpics.singleton.QrCodeInfo;
+import eu.elettra.logbookpics.singleton.Settings;
+import eu.elettra.logbookpics.utils.ImageUtils;
 
 public class PostActivity extends Activity {
 
@@ -33,6 +34,9 @@ public class PostActivity extends Activity {
                     @Override
                     public void onCallbackSuccessful() {
                         Toast.makeText(PostActivity.this, "Your changes are saved", Toast.LENGTH_SHORT).show();
+
+                        if(Settings.saveAfterPost) ImageUtils.saveBitmapToGallery(PostActivity.this);
+
                         startActivity(new Intent(PostActivity.this, AboutActivity.class));
                     }
 

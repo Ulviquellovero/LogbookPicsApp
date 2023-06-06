@@ -2,6 +2,7 @@ package eu.elettra.logbookpics;
 import eu.elettra.logbookpics.activities.AboutActivity;
 import eu.elettra.logbookpics.activities.PreviewActivity;
 import eu.elettra.logbookpics.singleton.QrCodeInfo;
+import eu.elettra.logbookpics.singleton.Settings;
 
 import android.Manifest;
 import android.app.Activity;
@@ -34,6 +35,10 @@ public class MainActivity extends Activity
         setContentView(R.layout.activity_main);
         initVariables();
         initView();
+
+        // init other stuff...
+        Settings.saveAfterPost = true;
+        Settings.photoPixels = 1000; // pixels
 
         // sends you to the About page when clicking the Elettra button
         ((ImageButton) findViewById(R.id.about_elettra)).setOnClickListener(new View.OnClickListener() {
