@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.appcompat.widget.AppCompatButton;
+
 import eu.elettra.logbookpics.MainActivity;
 import eu.elettra.logbookpics.R;
 import eu.elettra.logbookpics.json.JSONTask;
@@ -19,8 +21,8 @@ public class PostActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post);
 
-        Button post = (Button)findViewById(R.id.dopost);
-        Button notpost = (Button)findViewById(R.id.donotpost);
+        AppCompatButton post = (AppCompatButton)findViewById(R.id.dopost);
+        AppCompatButton notpost = (AppCompatButton)findViewById(R.id.donotpost);
 
         // Do posting
         post.setOnClickListener(new View.OnClickListener() {

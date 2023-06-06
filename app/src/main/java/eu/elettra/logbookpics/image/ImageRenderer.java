@@ -51,7 +51,7 @@ public class ImageRenderer {
         this.activity=activity;
         this.ctx=ctx;
         
-        setupActivityResultLauncher();
+        //setupActivityResultLauncher();
 
         if(QrCodeInfo.jsonTask==null)
             QrCodeInfo.jsonTask = new JSONTask(ctx);
@@ -97,7 +97,7 @@ public class ImageRenderer {
         } else if (image.equals("file")) {
 
             // TODO: make this work somehow
-            launchGalleryActivity();
+            //launchGalleryActivity();
 
             // small control here
             if(QrCodeInfo.imageBitmap!=null) jsonCallback.onCallbackSuccessful(); else jsonCallback.onCallbackFailed();
@@ -150,6 +150,7 @@ public class ImageRenderer {
     }
 
 
+    /*
     private void setupActivityResultLauncher() {
         // this does not work for some reasons that only god knows
         galleryActivityResultLauncher =  activity.registerForActivityResult(
@@ -169,6 +170,7 @@ public class ImageRenderer {
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         galleryActivityResultLauncher.launch(intent);
     }
+     */
 
 
 
