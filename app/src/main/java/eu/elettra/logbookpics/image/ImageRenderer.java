@@ -5,21 +5,17 @@ import static androidx.activity.result.ActivityResultCallerKt.registerForActivit
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import org.json.JSONException;
@@ -30,11 +26,9 @@ import java.io.IOException;
 import java.util.Base64;
 
 import eu.elettra.logbookpics.activities.CameraActivity;
-import eu.elettra.logbookpics.activities.PreviewActivity;
 import eu.elettra.logbookpics.json.JSONTask;
 import eu.elettra.logbookpics.singleton.QrCodeInfo;
 import eu.elettra.logbookpics.utils.ImageUtils;
-import kotlin.Unit;
 
 public class ImageRenderer {
 
@@ -42,16 +36,20 @@ public class ImageRenderer {
     private String url;
     private String postUrl;
     private ImageView imageRef;
-    private Activity activity;
+    private AppCompatActivity activity;
     private ActivityResultLauncher<Intent> galleryActivityResultLauncher;
     private Context ctx;
 
-    public ImageRenderer(Activity activity, Context ctx, String url, int id, JSONTask.JSONCallback jsonCallback) {
+    private JSONTask.JSONCallback jsonCallback;
+
+    public ImageRenderer(AppCompatActivity activity, Context ctx, String url, int id, JSONTask.JSONCallback jsonCallback) {
         imageRef = (ImageView) activity.findViewById(id);
         this.activity=activity;
         this.ctx=ctx;
-        
-        //setupActivityResultLauncher();
+
+        this.jsonCallback = jsonCallback;
+        // TODO
+        setupActivityResultLauncher();
 
         if(QrCodeInfo.jsonTask==null)
             QrCodeInfo.jsonTask = new JSONTask(ctx);
@@ -91,14 +89,12 @@ public class ImageRenderer {
         if(image.equals("camera")){
             if(QrCodeInfo.imageBitmap==null)
                 activity.startActivity(new Intent(activity, CameraActivity.class));
-            // small control here
-            if(QrCodeInfo.imageBitmap!=null) jsonCallback.onCallbackSuccessful(); else jsonCallback.onCallbackFailed();
+            // resolved in other function
             return;
         } else if (image.equals("file")) {
 
             // TODO: make this work somehow
-            //launchGalleryActivity();
-
+            launchGalleryActivity();
             // small control here
             if(QrCodeInfo.imageBitmap!=null) jsonCallback.onCallbackSuccessful(); else jsonCallback.onCallbackFailed();
             return;
@@ -150,7 +146,7 @@ public class ImageRenderer {
     }
 
 
-    /*
+
     private void setupActivityResultLauncher() {
         // this does not work for some reasons that only god knows
         galleryActivityResultLauncher =  activity.registerForActivityResult(
@@ -161,7 +157,21 @@ public class ImageRenderer {
                         // Gestisci il risultato qui
                         int resultCode = result.getResultCode();
                         Intent data = result.getData();
-                        // Esegui le operazioni necessarie in base al risultato
+
+                        if (result.getResultCode() == Activity.RESULT_OK) {
+                            Uri imageUri = data.getData();
+
+                            try {
+                                Bitmap tBitmap = MediaStore.Images.Media.getBitmap(activity.getContentResolver(), imageUri);
+                                QrCodeInfo.imageBitmap = ImageUtils.getResizedBitmap(tBitmap, 1000);
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
+
+                            // small control here
+                            if(QrCodeInfo.imageBitmap!=null) jsonCallback.onCallbackSuccessful(); else jsonCallback.onCallbackFailed();
+
+                        }
                     }
                 });
     }
@@ -170,7 +180,6 @@ public class ImageRenderer {
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         galleryActivityResultLauncher.launch(intent);
     }
-     */
 
 
 

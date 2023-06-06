@@ -20,6 +20,7 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultCallerKt;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.appcompat.app.AppCompatActivity;
 
 import org.w3c.dom.Text;
 
@@ -33,12 +34,13 @@ import eu.elettra.logbookpics.json.JSONTask;
 import eu.elettra.logbookpics.singleton.QrCodeInfo;
 import eu.elettra.logbookpics.utils.ImageUtils;
 
-public class PreviewActivity extends Activity {
+public class PreviewActivity extends AppCompatActivity {
 
     ImageRenderer imageRenderer;
     PostHandler postHandler;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        getSupportActionBar().hide();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.image_prev);
         Activity act = this;

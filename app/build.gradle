@@ -43,7 +43,10 @@ dependencies {
     implementation "androidx.camera:camera-lifecycle:${camerax_version}"
     implementation"androidx.camera:camera-view:1.0.0-alpha12"
     implementation "androidx.camera:camera-extensions:1.0.0-alpha12"
-    implementation "androidx.fragment:fragment:1.4.1"
-    implementation "androidx.activity:activity:1.4.1"
-    implementation 'androidx.appcompat:appcompat:1.4.1'
+    implementation "androidx.fragment:fragment:1.5.1"
+    implementation "androidx.activity:activity:1.5.1"
+    implementation 'androidx.appcompat:appcompat:1.5.1'
+
+
+    implementation 'androidx.activity:activity-ktx:1.6.0'
 }
