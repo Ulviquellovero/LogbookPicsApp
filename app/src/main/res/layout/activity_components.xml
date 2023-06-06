@@ -3,21 +3,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="10dp">
+    android:padding="10dp"
+    android:background="#2E2E2E">
 
     <Spinner
         android:id="@+id/spinner1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:drawable/btn_dropdown"
-        android:spinnerMode="dropdown"/>
+        android:spinnerMode="dropdown"
+        android:backgroundTint="#3B4ACF" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:id="@+id/add_component"
-        android:text="Add component"></Button>
+        android:text="Add component"
+        android:backgroundTint="#3B4ACF"></Button>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -48,14 +51,17 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Title: "></TextView>
+                            android:text="Title: "
+                            android:textColor="@color/white"></TextView>
                         <EditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:id="@+id/new_title"
                             android:maxLines="1"
                             android:inputType="text"
-                            android:text="TODO">
+                            android:text="TODO"
+                            android:textColor="@color/white"
+                            android:backgroundTint="@color/white">
 
                         </EditText>
                     </LinearLayout>
@@ -65,14 +71,18 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Info: "></TextView>
+                            android:text="Info: "
+                            android:textColor="@color/white"></TextView>
                         <EditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:id="@+id/new_info"
                             android:maxLines="1"
                             android:inputType="text"
-                            android:text="TODO">
+                            android:text="TODO"
+                            android:textColor="@color/white"
+                            android:backgroundTint="@color/white"
+                            >
 
                         </EditText>
                     </LinearLayout>
@@ -98,12 +108,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/undo"
-                    android:text="Undo every change"></Button>
+                    android:text="Undo every change"
+                    android:backgroundTint="#3B4ACF"></Button>
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/proceed"
-                    android:text="Proceed"></Button>
+                    android:text="Proceed"
+                    android:backgroundTint="#3B4ACF"></Button>
 
             </LinearLayout>
         </LinearLayout>
