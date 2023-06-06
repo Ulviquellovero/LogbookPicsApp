@@ -89,14 +89,15 @@ public class ImageRenderer {
         if(image.equals("camera")){
             if(QrCodeInfo.imageBitmap==null)
                 activity.startActivity(new Intent(activity, CameraActivity.class));
-            // resolved in other function
+
+            // small control here
+            if(QrCodeInfo.imageBitmap!=null) jsonCallback.onCallbackSuccessful(); else jsonCallback.onCallbackFailed();
             return;
         } else if (image.equals("file")) {
 
             // TODO: make this work somehow
             launchGalleryActivity();
-            // small control here
-            if(QrCodeInfo.imageBitmap!=null) jsonCallback.onCallbackSuccessful(); else jsonCallback.onCallbackFailed();
+            // resolved in other function
             return;
         }
 
@@ -154,11 +155,10 @@ public class ImageRenderer {
                 new ActivityResultCallback<ActivityResult>() {
                     @Override
                     public void onActivityResult(ActivityResult result) {
-                        // Gestisci il risultato qui
                         int resultCode = result.getResultCode();
                         Intent data = result.getData();
 
-                        if (result.getResultCode() == Activity.RESULT_OK) {
+                        if (resultCode == Activity.RESULT_OK) {
                             Uri imageUri = data.getData();
 
                             try {
