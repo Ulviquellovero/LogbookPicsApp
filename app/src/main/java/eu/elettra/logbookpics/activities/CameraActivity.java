@@ -58,6 +58,7 @@ import java.util.concurrent.Executors;
 import eu.elettra.logbookpics.MainActivity;
 import eu.elettra.logbookpics.R;
 import eu.elettra.logbookpics.singleton.QrCodeInfo;
+import eu.elettra.logbookpics.singleton.Settings;
 import eu.elettra.logbookpics.utils.ImageUtils;
 
 public class CameraActivity extends AppCompatActivity {
@@ -149,7 +150,7 @@ public class CameraActivity extends AppCompatActivity {
                         Bitmap bitmapBuffer = BitmapFactory.decodeByteArray(bytes, 0, bytes.length, null);
                         // resize bitmap buffer
                         // TODO: 1280 seems to be too big
-                        bitmapBuffer = ImageUtils.getResizedBitmap(bitmapBuffer, 1000);
+                        bitmapBuffer = ImageUtils.getResizedBitmap(bitmapBuffer, Settings.photoPixels);
 
                         //QrCodeInfo.imageBitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length, null);
                         QrCodeInfo.imageBitmap = bitmapBuffer;

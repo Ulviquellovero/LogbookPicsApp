@@ -28,6 +28,7 @@ import java.util.Base64;
 import eu.elettra.logbookpics.activities.CameraActivity;
 import eu.elettra.logbookpics.json.JSONTask;
 import eu.elettra.logbookpics.singleton.QrCodeInfo;
+import eu.elettra.logbookpics.singleton.Settings;
 import eu.elettra.logbookpics.utils.ImageUtils;
 
 public class ImageRenderer {
@@ -163,7 +164,7 @@ public class ImageRenderer {
 
                             try {
                                 Bitmap tBitmap = MediaStore.Images.Media.getBitmap(activity.getContentResolver(), imageUri);
-                                QrCodeInfo.imageBitmap = ImageUtils.getResizedBitmap(tBitmap, 1000);
+                                QrCodeInfo.imageBitmap = ImageUtils.getResizedBitmap(tBitmap, Settings.photoPixels);
                             } catch (IOException e) {
                                 throw new RuntimeException(e);
                             }
