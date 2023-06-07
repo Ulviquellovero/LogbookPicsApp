@@ -9,6 +9,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 
@@ -37,8 +39,10 @@ public class MainActivity extends Activity
         initView();
 
         // init other stuff...
-        Settings.saveAfterPost = true;
-        Settings.photoPixels = 1000; // pixels
+        Settings.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        Settings.saveAfterPost = Settings.sharedPreferences.getBoolean("saveAfterPost", true);
+        Log.d("LogBookDebug",Boolean.toString(Settings.saveAfterPost));
+        Settings.photoPixels = Settings.sharedPreferences.getInt("photoPixels",1000); // pixels
 
         // sends you to the About page when clicking the Elettra button
         ((ImageButton) findViewById(R.id.about_elettra)).setOnClickListener(new View.OnClickListener() {

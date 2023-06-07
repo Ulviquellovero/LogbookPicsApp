@@ -1,5 +1,6 @@
 package eu.elettra.logbookpics.utils;
 
+import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -49,7 +50,8 @@ public class ImageUtils {
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
             outputStream.flush();
 
-            scanFile(file, ctx);
+            //scanFile(file, ctx);
+            addImageToGallery(file, ctx);
         } catch (IOException e) {
             e.printStackTrace();
             // Handle the exception
@@ -64,18 +66,16 @@ public class ImageUtils {
         }
     }
 
-    private static void scanFile(File file, Context ctx) {
-        MediaScannerConnection.scanFile(
-                ctx,
-                new String[]{file.getAbsolutePath()},
-                null,
-                new MediaScannerConnection.OnScanCompletedListener() {
-                    @Override
-                    public void onScanCompleted(String path, Uri uri) {
-                        // Media scan completed, file is now accessible in the Gallery
-                    }
-                }
-        );
+
+    private static void addImageToGallery(File file, Context ctx){
+            if(!file.exists()) return;
+            ContentResolver contentResolver = ctx.getContentResolver();
+            ContentValues values = new ContentValues();
+            values.put(MediaStore.Images.Media.DISPLAY_NAME, file.getName());
+            values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg");
+            values.put(MediaStore.Images.Media.DATA, file.getAbsolutePath());
+
+            Uri uri = contentResolver.insert(MediaStore.Images.Media.INTERNAL_CONTENT_URI, values);
     }
 
 }
