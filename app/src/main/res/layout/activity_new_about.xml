@@ -10,42 +10,35 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:src="@drawable/elettra_logo"
-        app:layout_constraintBottom_toTopOf="@+id/logo_connector"
-        app:layout_constraintDimensionRatio="H,1:1"
+        app:layout_constraintBottom_toTopOf="@+id/collab_icon"
         app:layout_constraintEnd_toStartOf="@+id/end_guideline"
+        app:layout_constraintHorizontal_bias="0.5"
+        android:layout_margin="20dp"
         app:layout_constraintStart_toStartOf="@+id/start_guideline"
         app:layout_constraintTop_toTopOf="@+id/top_guideline" />
 
-    <TextView
-        android:id="@+id/logo_connector"
+    <ImageView
+        android:id="@+id/collab_icon"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="x"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        app:autoSizeMaxTextSize="128sp"
-        app:autoSizeMinTextSize="40sp"
-        app:autoSizeStepGranularity="1sp"
-        app:autoSizeTextType="uniform"
+        android:src="@drawable/close_icon"
         app:layout_constraintBottom_toTopOf="@+id/volta_logo"
-        app:layout_constraintDimensionRatio="H,1:1"
         app:layout_constraintEnd_toStartOf="@+id/end_guideline"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/start_guideline"
-        app:layout_constraintTop_toBottomOf="@+id/elettra_logo" />
+        app:layout_constraintTop_toBottomOf="@+id/elettra_logo"
+        android:layout_marginBottom="30dp"/>
 
     <ImageView
         android:id="@+id/volta_logo"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:padding="10dp"
         android:src="@drawable/volta_logo"
         app:layout_constraintBottom_toTopOf="@+id/bottom_guideline"
-        app:layout_constraintDimensionRatio="H,1:1"
         app:layout_constraintEnd_toStartOf="@+id/end_guideline"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/start_guideline"
-        app:layout_constraintTop_toBottomOf="@+id/logo_connector" />
+        app:layout_constraintTop_toBottomOf="@+id/collab_icon" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/start_guideline"
@@ -87,11 +80,30 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageButton
+        android:id="@+id/close_btn"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/transparent"
+        android:scaleType="fitCenter"
+        android:src="@drawable/close_icon"
+        app:layout_constraintBottom_toTopOf="@+id/button_bottom_guideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/end_guideline"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/end_page_title_guideline"
+        android:id="@+id/button_bottom_guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.9" />
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.1" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/center_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
