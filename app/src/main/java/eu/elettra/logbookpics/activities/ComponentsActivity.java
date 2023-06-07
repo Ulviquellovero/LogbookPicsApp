@@ -33,7 +33,7 @@ public class ComponentsActivity extends Activity {
         //get the spinner from the xml.
         Spinner dropdown = findViewById(R.id.spinner1);
         //create a list of items for the spinner.
-        String[] items = new String[]{"TextLabel", "Checkbox", "Radio","Bulleted List","Dropdown"};
+        String[] items = new String[]{"TextLabel", "Checkbox", "Radio","Bulleted List"};
         //create an adapter to describe how the items are displayed, adapters are used in several places in android.
         //There are multiple variations of this, but this is the basic variant.
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
@@ -79,11 +79,6 @@ public class ComponentsActivity extends Activity {
                     case 3:{
                         Log.d("LogBookDebug", "Bulleted List");
                         type="bullettedlist";
-                        break;
-                    }
-                    case 4:{
-                        Log.d("LogBookDebug", "Dropdown");
-                        type="dropdown";
                         break;
                     }
                 }
