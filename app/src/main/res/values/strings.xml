@@ -66,4 +66,5 @@
     <string name="upload_preview">Upload Preview</string>
     <string name="montagna">Montagna</string>
     <string name="about">About</string>
+    <string name="about_text">LogbookPicsApp (LPA) is a novel way for annotating images. The annotation goes beyond the standard graphical one and includes application specific textual metadata. The LPA backend servers dictate the interface and metadata required for each annotation task. It is primarily meant for electronic lab books, ML labelling tasks, and warehouse DBs but it can be useful in many other cases as it is dynamically defined. The supervision, concept and backend are of Elettra Sincrotrone Trieste while the initial version of the Android app was done by students of ITS Volta as OSS in the context of a PCTO program.</string>
 </resources>
