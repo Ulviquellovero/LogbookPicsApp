@@ -9,11 +9,11 @@
         android:id="@+id/elettra_logo"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_margin="20dp"
         android:src="@drawable/elettra_logo"
         app:layout_constraintBottom_toTopOf="@+id/collab_icon"
         app:layout_constraintEnd_toStartOf="@+id/end_guideline"
         app:layout_constraintHorizontal_bias="0.5"
-        android:layout_margin="20dp"
         app:layout_constraintStart_toStartOf="@+id/start_guideline"
         app:layout_constraintTop_toTopOf="@+id/top_guideline" />
 
@@ -21,13 +21,13 @@
         android:id="@+id/collab_icon"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginBottom="30dp"
         android:src="@drawable/close_icon"
         app:layout_constraintBottom_toTopOf="@+id/volta_logo"
         app:layout_constraintEnd_toStartOf="@+id/end_guideline"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/start_guideline"
-        app:layout_constraintTop_toBottomOf="@+id/elettra_logo"
-        android:layout_marginBottom="30dp"/>
+        app:layout_constraintTop_toBottomOf="@+id/elettra_logo" />
 
     <ImageView
         android:id="@+id/volta_logo"
@@ -110,17 +110,52 @@
     <TextView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="@string/about_text"
         android:layout_margin="15dp"
-        app:layout_constraintBottom_toBottomOf="@+id/view2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/view2"
-        android:textColor="@color/white"
         android:gravity="center_vertical"
+        android:text="@string/about_text"
+        android:textColor="@color/white"
         app:autoSizeMaxTextSize="24sp"
         app:autoSizeMinTextSize="12sp"
         app:autoSizeStepGranularity="2sp"
-        app:autoSizeTextType="uniform"/>
+        app:autoSizeTextType="uniform"
+        app:layout_constraintBottom_toTopOf="@+id/text_bottom_guideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/button_bottom_guideline" />
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/text_bottom_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.9" />
+
+    <ImageView
+        android:id="@+id/docs"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:background="@drawable/about_round_button"
+        android:padding="10dp"
+        android:src="@drawable/doc_icon"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/git"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/view2"
+        app:layout_constraintStart_toStartOf="@+id/start_guideline"
+        app:layout_constraintTop_toTopOf="@+id/text_bottom_guideline"
+        android:layout_marginBottom="30dp" />
+
+    <ImageView
+        android:id="@+id/git"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:background="@drawable/about_round_button"
+        android:padding="10dp"
+        android:src="@drawable/github_logo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/end_guideline"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/docs"
+        app:layout_constraintTop_toTopOf="@+id/text_bottom_guideline"
+        android:layout_marginBottom="30dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
